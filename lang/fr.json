@@ -1,0 +1,161 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "features": "Fonctionnalités",
+    "howItWorks": "Comment ça marche",
+    "docs": "Docs",
+    "contact": "Contact",
+    "download": "Télécharger"
+  },
+  "hero": {
+    "subtitle": "Connecteur de Base de Données Python Léger",
+    "title": "PulseConnector",
+    "description": "Transformez vos données en une API OData prête à l'emploi en quelques minutes. Accès rapide à MSSQL, MySQL/MariaDB, PostgreSQL et autres bases de données sans écrire de code supplémentaire.",
+    "cta": "En savoir plus"
+  },
+  "features": {
+    "title": "Fonctionnalités Clés",
+    "subtitle": "Idéal pour les développeurs et administrateurs qui doivent exposer des données de manière sécurisée et rapide.",
+    "multiDb": {
+      "title": "Support Multi-Base de Données",
+      "description": "Accès rapide à MSSQL, MySQL/MariaDB, PostgreSQL et autres bases de données sans écrire de code supplémentaire."
+    },
+    "gui": {
+      "title": "Interface Moderne",
+      "description": "Gestion complète depuis une interface moderne construite avec PySide6."
+    },
+    "ssh": {
+      "title": "Tunnels SSH",
+      "description": "Tunnels SSH intégrés pour une connectivité sécurisée aux bases de données distantes."
+    },
+    "backend": {
+      "title": "Backend Léger",
+      "description": "Backend léger avec Waitress, compatible avec Windows et Linux."
+    }
+  },
+  "databases": {
+    "title": "Bases de Données Supportées",
+    "subtitle": "Connectez-vous à votre moteur de base de données préféré sans code supplémentaire.",
+    "mysql": "Support complet pour MySQL 5.7+",
+    "postgresql": "Support complet pour PostgreSQL 10+",
+    "mssql": "Support complet pour MSSQL 2016+",
+    "mariadb": "Support complet pour MariaDB 10+"
+  },
+  "security": {
+    "title": "Sécurité et Architecture",
+    "description": "Tous les tunnels utilisent des connexions SSH chiffrées. Pas besoin d'ouvrir des ports publics sur votre réseau local. Le tunnel inverse permet uniquement au VPS autorisé d'accéder à votre OData. Authentification basée sur JWT avec Bearer Tokens et signature sécurisée des tokens pour les endpoints protégés.",
+    "dialects": "Dialectes BD",
+    "platforms": "Plateformes Supportées",
+    "encrypted": "Chiffré",
+    "cta": "Voir sur GitHub"
+  },
+  "howItWorks": {
+    "title": "Comment ça marche",
+    "subtitle": "Mettez votre API OData en service en quelques étapes simples.",
+    "step1": {
+      "title": "1. Configurer",
+      "description": "Éditez config.json pour configurer votre connexion de base de données (MySQL, PostgreSQL, MSSQL) et les paramètres du serveur."
+    },
+    "step2": {
+      "title": "2. Connecter",
+      "description": "Utilisez l'interface pour sélectionner votre dialecte de base de données et établir une connexion sécurisée via tunnel SSH si nécessaire."
+    },
+    "step3": {
+      "title": "3. Démarrer le Serveur",
+      "description": "Lancez le serveur Waitress en un seul clic. Accédez à votre API sur localhost ou configurez un proxy HTTPS."
+    },
+    "step4": {
+      "title": "4. Interroger",
+      "description": "Utilisez la syntaxe OData pour interroger vos données: $select, $filter, $top, $orderby. Insérez et mettez à jour via JSON."
+    }
+  },
+  "newFeatures": {
+    "subtitle": "Nouvelles Fonctionnalités",
+    "title": "Dernières Mises à Jour",
+    "description": "Couche d'accès aux données basée sur SQL personnalisé pour une meilleure concurrence. Drivers BD natifs avec pooling explicite. Authentification JWT. Intégration Proxy HTTPS. Compatibilité multiplateforme (Windows/Linux x64).",
+    "cta": "Commencer"
+  },
+  "license": {
+    "title": "Licence",
+    "subtitle": "PulseConnector est gratuit pour un usage non commercial. L'usage commercial nécessite une autorisation écrite préalable de l'auteur.",
+    "free": {
+      "type": "Non Commercial",
+      "title": "Licence Gratuite",
+      "price": "Gratuit",
+      "feature1": "Accès complet aux fonctionnalités",
+      "feature2": "Support multi-base de données",
+      "feature3": "Sécurité tunnel SSH",
+      "feature4": "Endpoints API OData",
+      "cta": "Télécharger"
+    },
+    "commercial": {
+      "type": "Usage Professionnel",
+      "title": "Licence Commerciale",
+      "price": "Contactez-nous",
+      "feature1": "Toutes les fonctionnalités gratuites",
+      "feature2": "Droits d'usage commercial",
+      "feature3": "Support prioritaire",
+      "feature4": "Intégrations personnalisées",
+      "cta": "Contact"
+    }
+  },
+  "team": {
+    "title": "Notre Équipe",
+    "subtitle": "Rencontrez les personnes derrière PulseConnector.",
+    "lead": "Développeur Principal",
+    "backend": "Développeur Backend",
+    "frontend": "Développeur Frontend",
+    "devops": "Ingénieur DevOps"
+  },
+  "odata": {
+    "subtitle": "Requêtes OData",
+    "title": "Support Puissant des Requêtes",
+    "description": "Utilisez $select, $filter, $top, $orderby et combinaisons. Support des opérateurs eq, ne, gt, lt, ge, le, like. Opérations d'insertion, mise à jour (PUT/PATCH) via JSON.",
+    "cta": "Commencer"
+  },
+  "faq": {
+    "title": "Questions Fréquentes",
+    "subtitle": "Trouvez des réponses aux questions courantes sur PulseConnector.",
+    "q1": {
+      "question": "Quelles bases de données PulseConnector supporte-t-il?",
+      "answer": "PulseConnector supporte MySQL, MariaDB, PostgreSQL et Microsoft SQL Server. Vous pouvez facilement basculer entre les bases de données en changeant l'active_dialect dans votre fichier config.json."
+    },
+    "q2": {
+      "question": "Comment sécuriser ma connexion de base de données?",
+      "answer": "PulseConnector fournit des tunnels SSH intégrés pour une connectivité sécurisée. Tous les tunnels utilisent des connexions SSH chiffrées, vous n'avez donc pas besoin d'ouvrir des ports publics sur votre réseau local. De plus, l'authentification basée sur JWT protège vos endpoints OData."
+    },
+    "q3": {
+      "question": "Quelles opérations OData sont supportées?",
+      "answer": "PulseConnector supporte $select, $filter, $top et $orderby pour les requêtes. Les opérateurs de filtre incluent eq, ne, gt, lt, ge, le et like. Vous pouvez également effectuer des opérations INSERT (POST), UPDATE complet (PUT) et UPDATE partiel (PATCH) via JSON."
+    },
+    "q4": {
+      "question": "Quelles plateformes sont supportées?",
+      "answer": "PulseConnector est compatible avec les systèmes Windows et Linux x64. L'installation du package inclut des bibliothèques embarquées, et le backend léger Waitress assure des performances constantes sur les deux plateformes."
+    },
+    "q5": {
+      "question": "PulseConnector est-il gratuit?",
+      "answer": "Oui, PulseConnector est gratuit pour un usage non commercial. L'usage commercial nécessite une autorisation écrite préalable de l'auteur. Contactez-nous pour les options de licence commerciale."
+    }
+  },
+  "contact": {
+    "title": "Contactez-nous",
+    "subtitle": "Vous avez des questions sur PulseConnector? Besoin d'aide pour l'intégration ou la licence commerciale? Contactez-nous!",
+    "form": {
+      "name": "Nom",
+      "email": "Email",
+      "number": "Téléphone",
+      "subject": "Sujet",
+      "message": "Message",
+      "submit": "Envoyer"
+    }
+  },
+  "footer": {
+    "description": "PulseConnector est un connecteur de base de données Python léger qui transforme vos données en une API OData prête à l'emploi en quelques minutes.",
+    "quickLinks": "Liens Rapides",
+    "features": "Fonctionnalités",
+    "resources": "Ressources",
+    "documentation": "Documentation",
+    "benchmark": "Benchmark",
+    "installer": "Installateur"
+  }
+}

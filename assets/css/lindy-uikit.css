@@ -2697,3 +2697,47 @@ input:focus, textarea:focus, button:focus {
 .pr-100 {
   padding-right: 100px;
 }
+
+
+/* ============================= 
+    FAQ ACCORDION STYLES
+================================ */
+#faq .card {
+  border: 1px solid #e5e5e5;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#faq .card-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 0;
+}
+
+#faq .card-header .btn-link {
+  width: 100%;
+  text-align: left;
+  padding: 18px 20px;
+  color: #2c2c51;
+  font-weight: 500;
+  font-size: 16px;
+  text-decoration: none;
+  display: block;
+}
+
+#faq .card-header .btn-link:hover {
+  color: #5767f9;
+  text-decoration: none;
+}
+
+#faq .card-header .btn-link:focus {
+  box-shadow: none;
+  text-decoration: none;
+}
+
+#faq .card-body {
+  padding: 20px;
+  color: #585978;
+  line-height: 1.7;
+  border-top: 1px solid #e5e5e5;
+}

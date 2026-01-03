@@ -1,0 +1,161 @@
+{
+  "nav": {
+    "home": "ホーム",
+    "features": "機能",
+    "howItWorks": "使い方",
+    "docs": "ドキュメント",
+    "contact": "お問い合わせ",
+    "download": "ダウンロード"
+  },
+  "hero": {
+    "subtitle": "軽量Pythonデータベースコネクタ",
+    "title": "PulseConnector",
+    "description": "数分でデータをすぐに使えるOData APIに変換します。追加コードなしでMSSQL、MySQL/MariaDB、PostgreSQLなどのデータベースに高速アクセス。",
+    "cta": "詳細を見る"
+  },
+  "features": {
+    "title": "主な機能",
+    "subtitle": "データを安全かつ迅速に公開する必要がある開発者や管理者に最適です。",
+    "multiDb": {
+      "title": "マルチデータベース対応",
+      "description": "追加コードなしでMSSQL、MySQL/MariaDB、PostgreSQLなどのデータベースに高速アクセス。"
+    },
+    "gui": {
+      "title": "モダンなGUI",
+      "description": "PySide6で構築されたモダンなGUIからの完全な管理。"
+    },
+    "ssh": {
+      "title": "SSHトンネル",
+      "description": "リモートデータベースへの安全な接続のための組み込みSSHトンネル。"
+    },
+    "backend": {
+      "title": "軽量バックエンド",
+      "description": "WindowsとLinuxに対応したWaitressによる軽量バックエンド。"
+    }
+  },
+  "databases": {
+    "title": "対応データベース",
+    "subtitle": "追加コードなしでお気に入りのデータベースエンジンに接続。",
+    "mysql": "MySQL 5.7+完全対応",
+    "postgresql": "PostgreSQL 10+完全対応",
+    "mssql": "MSSQL 2016+完全対応",
+    "mariadb": "MariaDB 10+完全対応"
+  },
+  "security": {
+    "title": "セキュリティとアーキテクチャ",
+    "description": "すべてのトンネルは暗号化されたSSH接続を使用。ローカルネットワークでパブリックポートを開く必要はありません。リバーストンネルにより、承認されたVPSのみがODataにアクセスできます。Bearer TokensによるJWTベースの認証と、保護されたエンドポイントのための安全なトークン署名。",
+    "dialects": "DBダイアレクト",
+    "platforms": "対応プラットフォーム",
+    "encrypted": "暗号化",
+    "cta": "GitHubで見る"
+  },
+  "howItWorks": {
+    "title": "使い方",
+    "subtitle": "いくつかの簡単なステップでOData APIを起動できます。",
+    "step1": {
+      "title": "1. 設定",
+      "description": "config.jsonを編集してデータベース接続（MySQL、PostgreSQL、MSSQL）とサーバー設定を構成します。"
+    },
+    "step2": {
+      "title": "2. 接続",
+      "description": "GUIを使用してデータベースダイアレクトを選択し、必要に応じてSSHトンネル経由で安全な接続を確立します。"
+    },
+    "step3": {
+      "title": "3. サーバー起動",
+      "description": "ワンクリックでWaitressサーバーを起動。localhostでAPIにアクセスするか、HTTPSプロキシを設定します。"
+    },
+    "step4": {
+      "title": "4. クエリ",
+      "description": "OData構文を使用してデータをクエリ：$select、$filter、$top、$orderby。JSONで挿入・更新。"
+    }
+  },
+  "newFeatures": {
+    "subtitle": "新機能",
+    "title": "最新アップデート",
+    "description": "同時実行性向上のためのカスタムSQLベースのデータアクセスレイヤー。明示的プーリングによるネイティブDBドライバー。JWT認証。HTTPSプロキシ統合。クロスプラットフォーム互換性（Windows/Linux x64）。",
+    "cta": "始める"
+  },
+  "license": {
+    "title": "ライセンス",
+    "subtitle": "PulseConnectorは非商用利用は無料です。商用利用には著者からの事前書面による承認が必要です。",
+    "free": {
+      "type": "非商用",
+      "title": "無料ライセンス",
+      "price": "無料",
+      "feature1": "全機能アクセス",
+      "feature2": "マルチデータベース対応",
+      "feature3": "SSHトンネルセキュリティ",
+      "feature4": "OData APIエンドポイント",
+      "cta": "ダウンロード"
+    },
+    "commercial": {
+      "type": "ビジネス利用",
+      "title": "商用ライセンス",
+      "price": "お問い合わせ",
+      "feature1": "無料機能すべて含む",
+      "feature2": "商用利用権",
+      "feature3": "優先サポート",
+      "feature4": "カスタム統合",
+      "cta": "お問い合わせ"
+    }
+  },
+  "team": {
+    "title": "チーム",
+    "subtitle": "PulseConnectorを支える人々をご紹介します。",
+    "lead": "リードデベロッパー",
+    "backend": "バックエンドデベロッパー",
+    "frontend": "フロントエンドデベロッパー",
+    "devops": "DevOpsエンジニア"
+  },
+  "odata": {
+    "subtitle": "ODataクエリ",
+    "title": "強力なクエリサポート",
+    "description": "$select、$filter、$top、$orderbyとその組み合わせを使用。eq、ne、gt、lt、ge、le、like演算子をサポート。JSONによる挿入、更新（PUT/PATCH）操作。",
+    "cta": "始める"
+  },
+  "faq": {
+    "title": "よくある質問",
+    "subtitle": "PulseConnectorに関するよくある質問への回答をご覧ください。",
+    "q1": {
+      "question": "PulseConnectorはどのデータベースに対応していますか？",
+      "answer": "PulseConnectorはMySQL、MariaDB、PostgreSQL、Microsoft SQL Serverに対応しています。config.jsonファイルのactive_dialectを変更することで、データベースを簡単に切り替えることができます。"
+    },
+    "q2": {
+      "question": "データベース接続をどのように保護しますか？",
+      "answer": "PulseConnectorは安全な接続のための組み込みSSHトンネルを提供します。すべてのトンネルは暗号化されたSSH接続を使用するため、ローカルネットワークでパブリックポートを開く必要はありません。さらに、JWTベースの認証がODataエンドポイントを保護します。"
+    },
+    "q3": {
+      "question": "どのOData操作がサポートされていますか？",
+      "answer": "PulseConnectorはクエリ用に$select、$filter、$top、$orderbyをサポートしています。フィルター演算子にはeq、ne、gt、lt、ge、le、likeが含まれます。また、JSONを介してINSERT（POST）、完全UPDATE（PUT）、部分UPDATE（PATCH）操作も実行できます。"
+    },
+    "q4": {
+      "question": "どのプラットフォームがサポートされていますか？",
+      "answer": "PulseConnectorはWindows及びLinux x64システムに対応しています。パッケージインストールには組み込みライブラリが含まれており、軽量なWaitressバックエンドが両プラットフォームで一貫したパフォーマンスを保証します。"
+    },
+    "q5": {
+      "question": "PulseConnectorは無料ですか？",
+      "answer": "はい、PulseConnectorは非商用利用は無料です。商用利用には著者からの事前書面による承認が必要です。商用ライセンスオプションについてはお問い合わせください。"
+    }
+  },
+  "contact": {
+    "title": "お問い合わせ",
+    "subtitle": "PulseConnectorについてご質問がありますか？統合や商用ライセンスについてサポートが必要ですか？お問い合わせください！",
+    "form": {
+      "name": "お名前",
+      "email": "メール",
+      "number": "電話番号",
+      "subject": "件名",
+      "message": "メッセージ",
+      "submit": "送信"
+    }
+  },
+  "footer": {
+    "description": "PulseConnectorは、数分でデータをすぐに使えるOData APIに変換する軽量Pythonデータベースコネクタです。",
+    "quickLinks": "クイックリンク",
+    "features": "機能",
+    "resources": "リソース",
+    "documentation": "ドキュメント",
+    "benchmark": "ベンチマーク",
+    "installer": "インストーラー"
+  }
+}

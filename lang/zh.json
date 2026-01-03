@@ -1,0 +1,161 @@
+{
+  "nav": {
+    "home": "首页",
+    "features": "功能",
+    "howItWorks": "使用方法",
+    "docs": "文档",
+    "contact": "联系我们",
+    "download": "下载"
+  },
+  "hero": {
+    "subtitle": "轻量级Python数据库连接器",
+    "title": "PulseConnector",
+    "description": "在几分钟内将您的数据转换为即用型OData API。无需编写额外代码即可快速访问MSSQL、MySQL/MariaDB、PostgreSQL等数据库。",
+    "cta": "了解更多"
+  },
+  "features": {
+    "title": "核心功能",
+    "subtitle": "非常适合需要安全快速地公开数据的开发人员和管理员。",
+    "multiDb": {
+      "title": "多数据库支持",
+      "description": "无需编写额外代码即可快速访问MSSQL、MySQL/MariaDB、PostgreSQL等数据库。"
+    },
+    "gui": {
+      "title": "现代化界面",
+      "description": "通过PySide6构建的现代化界面进行完整管理。"
+    },
+    "ssh": {
+      "title": "SSH隧道",
+      "description": "内置SSH隧道，实现与远程数据库的安全连接。"
+    },
+    "backend": {
+      "title": "轻量级后端",
+      "description": "使用Waitress的轻量级后端，兼容Windows和Linux。"
+    }
+  },
+  "databases": {
+    "title": "支持的数据库",
+    "subtitle": "无需额外代码即可连接到您喜爱的数据库引擎。",
+    "mysql": "完全支持MySQL 5.7+",
+    "postgresql": "完全支持PostgreSQL 10+",
+    "mssql": "完全支持MSSQL 2016+",
+    "mariadb": "完全支持MariaDB 10+"
+  },
+  "security": {
+    "title": "安全与架构",
+    "description": "所有隧道使用加密的SSH连接。无需在本地网络上打开公共端口。反向隧道仅允许授权的VPS访问您的OData。基于JWT的Bearer Token身份验证和安全的令牌签名保护端点。",
+    "dialects": "数据库方言",
+    "platforms": "支持平台",
+    "encrypted": "已加密",
+    "cta": "在GitHub上查看"
+  },
+  "howItWorks": {
+    "title": "使用方法",
+    "subtitle": "只需几个简单步骤即可启动您的OData API。",
+    "step1": {
+      "title": "1. 配置",
+      "description": "编辑config.json以设置数据库连接（MySQL、PostgreSQL、MSSQL）和服务器设置。"
+    },
+    "step2": {
+      "title": "2. 连接",
+      "description": "使用界面选择数据库方言，如需要可通过SSH隧道建立安全连接。"
+    },
+    "step3": {
+      "title": "3. 启动服务器",
+      "description": "一键启动Waitress服务器。在localhost访问API或配置HTTPS代理。"
+    },
+    "step4": {
+      "title": "4. 查询",
+      "description": "使用OData语法查询数据：$select、$filter、$top、$orderby。通过JSON插入和更新。"
+    }
+  },
+  "newFeatures": {
+    "subtitle": "新功能",
+    "title": "最新更新",
+    "description": "自定义基于SQL的数据访问层以提高并发性。带有显式池化的原生数据库驱动程序。JWT身份验证。HTTPS代理集成。跨平台兼容性（Windows/Linux x64）。",
+    "cta": "开始使用"
+  },
+  "license": {
+    "title": "许可证",
+    "subtitle": "PulseConnector免费用于非商业用途。商业使用需要作者的事先书面授权。",
+    "free": {
+      "type": "非商业",
+      "title": "免费许可",
+      "price": "免费",
+      "feature1": "完整功能访问",
+      "feature2": "多数据库支持",
+      "feature3": "SSH隧道安全",
+      "feature4": "OData API端点",
+      "cta": "下载"
+    },
+    "commercial": {
+      "type": "商业使用",
+      "title": "商业许可",
+      "price": "联系我们",
+      "feature1": "包含所有免费功能",
+      "feature2": "商业使用权",
+      "feature3": "优先支持",
+      "feature4": "自定义集成",
+      "cta": "联系"
+    }
+  },
+  "team": {
+    "title": "我们的团队",
+    "subtitle": "认识PulseConnector背后的团队。",
+    "lead": "首席开发者",
+    "backend": "后端开发者",
+    "frontend": "前端开发者",
+    "devops": "DevOps工程师"
+  },
+  "odata": {
+    "subtitle": "OData查询",
+    "title": "强大的查询支持",
+    "description": "使用$select、$filter、$top、$orderby及其组合。支持eq、ne、gt、lt、ge、le、like运算符。通过JSON进行插入、更新（PUT/PATCH）操作。",
+    "cta": "开始使用"
+  },
+  "faq": {
+    "title": "常见问题",
+    "subtitle": "查找有关PulseConnector的常见问题答案。",
+    "q1": {
+      "question": "PulseConnector支持哪些数据库？",
+      "answer": "PulseConnector支持MySQL、MariaDB、PostgreSQL和Microsoft SQL Server。您可以通过更改config.json文件中的active_dialect轻松切换数据库。"
+    },
+    "q2": {
+      "question": "如何保护我的数据库连接？",
+      "answer": "PulseConnector提供内置SSH隧道以实现安全连接。所有隧道使用加密的SSH连接，因此您无需在本地网络上打开公共端口。此外，基于JWT的身份验证保护您的OData端点。"
+    },
+    "q3": {
+      "question": "支持哪些OData操作？",
+      "answer": "PulseConnector支持查询的$select、$filter、$top和$orderby。过滤运算符包括eq、ne、gt、lt、ge、le和like。您还可以通过JSON执行INSERT（POST）、完整UPDATE（PUT）和部分UPDATE（PATCH）操作。"
+    },
+    "q4": {
+      "question": "支持哪些平台？",
+      "answer": "PulseConnector兼容Windows和Linux x64系统。软件包安装包含嵌入式库，轻量级Waitress后端确保两个平台上的一致性能。"
+    },
+    "q5": {
+      "question": "PulseConnector是免费的吗？",
+      "answer": "是的，PulseConnector免费用于非商业用途。商业使用需要作者的事先书面授权。请联系我们了解商业许可选项。"
+    }
+  },
+  "contact": {
+    "title": "联系我们",
+    "subtitle": "对PulseConnector有疑问？需要集成或商业许可方面的帮助？请联系我们！",
+    "form": {
+      "name": "姓名",
+      "email": "邮箱",
+      "number": "电话",
+      "subject": "主题",
+      "message": "消息",
+      "submit": "提交"
+    }
+  },
+  "footer": {
+    "description": "PulseConnector是一个轻量级Python数据库连接器，可在几分钟内将您的数据转换为即用型OData API。",
+    "quickLinks": "快速链接",
+    "features": "功能",
+    "resources": "资源",
+    "documentation": "文档",
+    "benchmark": "基准测试",
+    "installer": "安装程序"
+  }
+}

@@ -3,16 +3,98 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Flat - Bootstrap 5 Template</title>
-    <meta name="description" content="" />
+    <title>PulseConnector - Database to OData API</title>
+    <meta name="description" content="PulseConnector is a lightweight Python database connector that transforms your data into a ready-to-use OData API in minutes" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- Place favicon.ico in the root directory -->
+    <link rel="icon" type="image/png" href="assets/img/images/icon.png" />
 
     <!-- ========================= CSS here ========================= -->
     <link rel="stylesheet" href="assets/css/bootstrap-5.0.0-alpha-2.min.css" />
     <link rel="stylesheet" href="assets/css/LineIcons.2.0.css"/>
     <link rel="stylesheet" href="assets/css/animate.css"/>
     <link rel="stylesheet" href="assets/css/lindy-uikit.css"/>
+    <style>
+      /* Language Selector with Flags */
+      .lang-selector {
+        margin-left: 15px;
+        position: relative;
+      }
+      .lang-dropdown {
+        position: relative;
+        display: inline-block;
+      }
+      .lang-current {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        background-color: transparent;
+        border: 1px solid rgba(0,0,0,0.15);
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        color: #333;
+        transition: all 0.3s ease;
+      }
+      .lang-current:hover {
+        border-color: #5767f9;
+        background-color: rgba(87, 103, 249, 0.05);
+      }
+      .lang-current .flag {
+        font-size: 18px;
+        line-height: 1;
+      }
+      .lang-current .arrow {
+        font-size: 10px;
+        margin-left: 4px;
+        transition: transform 0.3s ease;
+      }
+      .lang-dropdown.open .lang-current .arrow {
+        transform: rotate(180deg);
+      }
+      .lang-options {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        margin-top: 5px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+        min-width: 150px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+        z-index: 1000;
+        overflow: hidden;
+      }
+      .lang-dropdown.open .lang-options {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+      .lang-option {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 15px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        font-size: 14px;
+        color: #333;
+      }
+      .lang-option:hover {
+        background-color: #f5f5f5;
+      }
+      .lang-option.active {
+        background-color: #5767f9;
+        color: #fff;
+      }
+      .lang-option .flag {
+        font-size: 20px;
+        line-height: 1;
+      }
+    </style>
   </head>
   <body>
     <!--[if lte IE 9]>
@@ -53,7 +135,7 @@
               <div class="col-lg-12">
                 <nav class="navbar navbar-expand-lg">
                   <a class="navbar-brand" href="index.html">
-                    <img src="assets/img/logo/logo.svg" alt="Logo" />
+                    <img src="assets/img/images/icon.png" alt="PulseConnector" style="max-height: 45px;" />
                   </a>
                   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent2" aria-controls="navbarSupportedContent2" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="toggler-icon"></span>
@@ -64,22 +146,67 @@
                   <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent2">
                     <ul id="nav2" class="navbar-nav ml-auto">
                       <li class="nav-item">
-                        <a class="page-scroll active" href="#home">Home</a>
+                        <a class="page-scroll active" href="#home" data-i18n="nav.home">Home</a>
                       </li>
                       <li class="nav-item">
-                        <a class="page-scroll" href="#services">Services</a>
+                        <a class="page-scroll" href="#services" data-i18n="nav.features">Features</a>
                       </li>
                       <li class="nav-item">
-                        <a class="page-scroll" href="#about">About</a>
+                        <a class="page-scroll" href="#how-it-works" data-i18n="nav.howItWorks">How it Works</a>
                       </li>
                       <li class="nav-item">
-                        <a class="page-scroll" href="#pricing">Pricing</a>
+                        <a href="documentation.html" data-i18n="nav.docs">Docs</a>
                       </li>
                       <li class="nav-item">
-                        <a class="page-scroll" href="#contact">Contact</a>
+                        <a class="page-scroll" href="#contact" data-i18n="nav.contact">Contact</a>
                       </li>
                     </ul>
-                    <a href="#0" class="button button-sm radius-10 d-none d-lg-flex">Get Started</a>
+                    <a href="#contact" class="button button-sm radius-10 d-none d-lg-flex" data-i18n="nav.download">Download</a>
+
+                    <!-- Language Selector -->
+                    <div class="lang-selector">
+                      <div class="lang-dropdown" id="langDropdown">
+                        <div class="lang-current" id="langCurrent">
+                          <span class="flag">🇺🇸</span>
+                          <span class="code">EN</span>
+                          <span class="arrow">▼</span>
+                        </div>
+                        <div class="lang-options">
+                          <div class="lang-option" data-lang="en">
+                            <span class="flag">🇺🇸</span>
+                            <span>English</span>
+                          </div>
+                          <div class="lang-option" data-lang="es">
+                            <span class="flag">🇪🇸</span>
+                            <span>Español</span>
+                          </div>
+                          <div class="lang-option" data-lang="pt">
+                            <span class="flag">🇧🇷</span>
+                            <span>Português</span>
+                          </div>
+                          <div class="lang-option" data-lang="fr">
+                            <span class="flag">🇫🇷</span>
+                            <span>Français</span>
+                          </div>
+                          <div class="lang-option" data-lang="it">
+                            <span class="flag">🇮🇹</span>
+                            <span>Italiano</span>
+                          </div>
+                          <div class="lang-option" data-lang="ja">
+                            <span class="flag">🇯🇵</span>
+                            <span>日本語</span>
+                          </div>
+                          <div class="lang-option" data-lang="zh">
+                            <span class="flag">🇨🇳</span>
+                            <span>中文</span>
+                          </div>
+                          <div class="lang-option" data-lang="de">
+                            <span class="flag">🇩🇪</span>
+                            <span>Deutsch</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                   <!-- navbar collapse -->
                 </nav>
@@ -100,18 +227,17 @@
           <div class="row align-items-end">
             <div class="col-lg-6">
               <div class="hero-content-wrapper">
-                <h4 class="wow fadeInUp" data-wow-delay=".2s">You're Using</h4>
-                <h2 class="mb-30 wow fadeInUp" data-wow-delay=".4s">Free Lite Version of Template</h2>
-                <p class="mb-50 wow fadeInUp" data-wow-delay=".6s">Please, purchase full version of the template to get all sections, features and permission to remove footer credit</p>
+                <h4 class="wow fadeInUp" data-wow-delay=".2s" data-i18n="hero.subtitle">Lightweight Python Database Connector</h4>
+                <h2 class="mb-30 wow fadeInUp" data-wow-delay=".4s" data-i18n="hero.title">PulseConnector</h2>
+                <p class="mb-50 wow fadeInUp" data-wow-delay=".6s" data-i18n="hero.description">Transform your data into a ready-to-use OData API in minutes. Fast access to MSSQL, MySQL/MariaDB, PostgreSQL and other databases without writing additional code.</p>
                 <div class="buttons">
-                  <a href="https://rebrand.ly/flat-ud/" rel="nofollow" target="blank" class="button button-lg radius-10 wow fadeInUp" data-wow-delay=".7s">Purchase Now</a>
+                  <a href="#services" class="button button-lg radius-10 wow fadeInUp" data-wow-delay=".7s" data-i18n="hero.cta">Learn More</a>
                 </div>
               </div>
             </div>
             <div class="col-lg-6">
               <div class="hero-image">
-                <img src="assets/img/hero/hero-2/hero-img.svg" alt="" class="wow fadeInRight" data-wow-delay=".2s">
-                <img src="assets/img/hero/hero-2/paattern.svg" alt="" class="shape shape-1">
+                <img src="assets/img/images/pulseconnector1.png" alt="PulseConnector" class="wow fadeInRight" data-wow-delay=".2s" style="max-width: 100%; border-radius: 10px; box-shadow: 0 10px 40px rgba(0,0,0,0.2);">
               </div>
             </div>
           </div>
@@ -130,8 +256,8 @@
             <div class="row">
               <div class="col-xl-7 col-lg-10 col-md-9">
                 <div class="section-title mb-60">
-                  <h3 class="mb-15 wow fadeInUp" data-wow-delay=".2s">The future of designing starts here</h3>
-                  <p class="wow fadeInUp" data-wow-delay=".4s">Stop wasting time and money designing and managing a website that doesn’t get results. Happiness guaranteed!</p>
+                  <h3 class="mb-15 wow fadeInUp" data-wow-delay=".2s" data-i18n="features.title">Key Features</h3>
+                  <p class="wow fadeInUp" data-wow-delay=".4s" data-i18n="features.subtitle">Ideal for developers and administrators who need to expose data securely and quickly.</p>
                 </div>
               </div>
             </div>
@@ -140,44 +266,44 @@
               <div class="col-md-6">
                 <div class="single-feature wow fadeInUp" data-wow-delay=".2s">
                   <div class="icon">
-                    <i class="lni lni-vector"></i>
+                    <i class="lni lni-database"></i>
                   </div>
                   <div class="content">
-                    <h5 class="mb-25">Graphics Design</h5>
-                    <p>Short description for the ones who look for something new.</p>
+                    <h5 class="mb-25" data-i18n="features.multiDb.title">Multi-Database Support</h5>
+                    <p data-i18n="features.multiDb.description">Fast access to MSSQL, MySQL/MariaDB, PostgreSQL and other databases without writing additional code.</p>
                   </div>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="single-feature wow fadeInUp" data-wow-delay=".4s">
                   <div class="icon">
-                    <i class="lni lni-layers"></i>
+                    <i class="lni lni-display"></i>
                   </div>
                   <div class="content">
-                    <h5 class="mb-25">UI/UX Design</h5>
-                    <p>Short description for the ones who look for something new.</p>
+                    <h5 class="mb-25" data-i18n="features.gui.title">Modern GUI</h5>
+                    <p data-i18n="features.gui.description">Complete management from a modern GUI built with PySide6.</p>
                   </div>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="single-feature wow fadeInUp" data-wow-delay=".6s">
                   <div class="icon">
-                    <i class="lni lni-layout"></i>
+                    <i class="lni lni-lock"></i>
                   </div>
                   <div class="content">
-                    <h5 class="mb-25">Web Design</h5>
-                    <p>Short description for the ones who look for something new.</p>
+                    <h5 class="mb-25" data-i18n="features.ssh.title">SSH Tunnels</h5>
+                    <p data-i18n="features.ssh.description">Built-in SSH tunnels for secure connectivity to remote databases.</p>
                   </div>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="single-feature wow fadeInUp" data-wow-delay=".8s">
                   <div class="icon">
-                    <i class="lni lni-display"></i>
+                    <i class="lni lni-cog"></i>
                   </div>
                   <div class="content">
-                    <h5 class="mb-25">Web Development</h5>
-                    <p>Short description for the ones who look for something new.</p>
+                    <h5 class="mb-25" data-i18n="features.backend.title">Lightweight Backend</h5>
+                    <p data-i18n="features.backend.description">Lightweight backend with Waitress, compatible with Windows and Linux.</p>
                   </div>
                 </div>
               </div>
@@ -187,10 +313,65 @@
         </div>
       </div>
       <div class="feature-img wow fadeInLeft" data-wow-delay=".2s">
-        <img src="assets/img/feature/feature-2-1.svg" alt="">
+        <img src="assets/img/images/screenshots/capture2.png" alt="PulseConnector GUI" style="max-width: 90%; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
       </div>
     </section>
 		<!-- ========================= feature style-2 end ========================= -->
+
+    <!-- ========================= supported databases start ========================= -->
+    <section id="databases" class="pt-100 pb-100 bg-white">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-xxl-6 col-xl-6 col-lg-8 col-md-10">
+            <div class="section-title text-center mb-60">
+              <h3 class="mb-15 wow fadeInUp" data-wow-delay=".2s" data-i18n="databases.title">Supported Databases</h3>
+              <p class="wow fadeInUp" data-wow-delay=".4s" data-i18n="databases.subtitle">Connect to your favorite database engine with zero additional code.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="text-center wow fadeInUp" data-wow-delay=".2s">
+              <div class="mb-30 p-4">
+                <i class="lni lni-database" style="font-size: 64px; color: #4479A1;"></i>
+                <h5 class="mt-20">MySQL</h5>
+                <p class="text-muted" data-i18n="databases.mysql">Full support for MySQL 5.7+</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="text-center wow fadeInUp" data-wow-delay=".4s">
+              <div class="mb-30 p-4">
+                <i class="lni lni-database" style="font-size: 64px; color: #336791;"></i>
+                <h5 class="mt-20">PostgreSQL</h5>
+                <p class="text-muted" data-i18n="databases.postgresql">Full support for PostgreSQL 10+</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="text-center wow fadeInUp" data-wow-delay=".6s">
+              <div class="mb-30 p-4">
+                <i class="lni lni-database" style="font-size: 64px; color: #CC2927;"></i>
+                <h5 class="mt-20">Microsoft SQL Server</h5>
+                <p class="text-muted" data-i18n="databases.mssql">Full support for MSSQL 2016+</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="text-center wow fadeInUp" data-wow-delay=".8s">
+              <div class="mb-30 p-4">
+                <i class="lni lni-database" style="font-size: 64px; color: #003545;"></i>
+                <h5 class="mt-20">MariaDB</h5>
+                <p class="text-muted" data-i18n="databases.mariadb">Full support for MariaDB 10+</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <!-- ========================= supported databases end ========================= -->
 
     <!-- ========================= about style-3 start ========================= -->
     <section id="about" class="about-section about-style-3">
@@ -198,30 +379,30 @@
         <div class="row align-items-center">
           <div class="col-lg-6">
             <div class="about-image wow fadeInLeft" data-wow-delay=".2s">
-              <img src="assets/img/about/about-3/about-img.jpg" alt="">
+              <img src="assets/img/images/network_architecture.png" alt="Network Architecture" style="border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
             </div>
           </div>
           <div class="col-lg-6">
             <div class="about-content-wrapper">
               <div class="section-title mb-40">
-                <h3 class="mb-25 wow fadeInUp" data-wow-delay=".2s">The future of designing starts here</h3>
-                <p class="wow fadeInUp" data-wow-delay=".4s">Stop wasting time and money designing and managing a website that doesn’t get results. Happiness guaranteed, Stop wasting time and money designing and managing a website that doesn’t get results. Happiness guaranteed,</p>
+                <h3 class="mb-25 wow fadeInUp" data-wow-delay=".2s" data-i18n="security.title">Security & Architecture</h3>
+                <p class="wow fadeInUp" data-wow-delay=".4s" data-i18n="security.description">All tunnels use encrypted SSH connections. No need to open public ports on your local network. The reverse tunnel allows only the authorized VPS to access your OData. JWT-Based Authentication with Bearer Tokens and secure token signing for protected endpoints.</p>
               </div>
               <div class="counter-up-wrapper mb-40 wow fadeInUp" data-wow-delay=".6s">
                 <div class="single-counter">
-                  <h4 class="countup" id="secondo1" cup-end="123" cup-append="M">123 M</h4>
-                  <h6>Happy Client</h6>
+                  <h4 class="countup" id="secondo1" cup-end="4" cup-append="+">4+</h4>
+                  <h6 data-i18n="security.dialects">Database Dialects</h6>
                 </div>
                 <div class="single-counter">
-                  <h4 class="countup" id="secondo2" cup-end="1434" cup-append="K">1434 K</h4>
-                  <h6>Project Done</h6>
+                  <h4 class="countup" id="secondo2" cup-end="2" cup-append="">2</h4>
+                  <h6 data-i18n="security.platforms">Platforms Supported</h6>
                 </div>
                 <div class="single-counter">
-                  <h4 class="countup" id="secondo3" cup-end="134" cup-append="K">134 K</h4>
-                  <h6>Award Win</h6>
+                  <h4 class="countup" id="secondo3" cup-end="100" cup-append="%">100%</h4>
+                  <h6 data-i18n="security.encrypted">Encrypted</h6>
                 </div>
               </div>
-              <a href="#0" class="button button-lg radius-3 wow fadeInUp" data-wow-delay=".7s">Learn More</a>
+              <a href="https://github.com" target="_blank" class="button button-lg radius-3 wow fadeInUp" data-wow-delay=".7s" data-i18n="security.cta">View on GitHub</a>
             </div>
           </div>
         </div>
@@ -229,13 +410,75 @@
     </section>
     <!-- ========================= about style-3 end ========================= -->
 
+    <!-- ========================= how-it-works start ========================= -->
+    <section id="how-it-works" class="feature-section pt-100 pb-100">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-xxl-5 col-xl-5 col-lg-7 col-md-10">
+            <div class="section-title text-center mb-60">
+              <h3 class="mb-15 wow fadeInUp" data-wow-delay=".2s" data-i18n="howItWorks.title">How it Works</h3>
+              <p class="wow fadeInUp" data-wow-delay=".4s" data-i18n="howItWorks.subtitle">Get your OData API up and running in just a few simple steps.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-3 col-md-6">
+            <div class="single-feature text-center wow fadeInUp" data-wow-delay=".2s">
+              <div class="icon">
+                <i class="lni lni-cog"></i>
+              </div>
+              <div class="content">
+                <h5 class="mb-25" data-i18n="howItWorks.step1.title">1. Configure</h5>
+                <p data-i18n="howItWorks.step1.description">Edit config.json to set up your database connection (MySQL, PostgreSQL, MSSQL) and server settings.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="single-feature text-center wow fadeInUp" data-wow-delay=".4s">
+              <div class="icon">
+                <i class="lni lni-database"></i>
+              </div>
+              <div class="content">
+                <h5 class="mb-25" data-i18n="howItWorks.step2.title">2. Connect</h5>
+                <p data-i18n="howItWorks.step2.description">Use the GUI to select your database dialect and establish a secure connection via SSH tunnel if needed.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="single-feature text-center wow fadeInUp" data-wow-delay=".6s">
+              <div class="icon">
+                <i class="lni lni-play"></i>
+              </div>
+              <div class="content">
+                <h5 class="mb-25" data-i18n="howItWorks.step3.title">3. Start Server</h5>
+                <p data-i18n="howItWorks.step3.description">Launch the Waitress server with a single click. Access your API at localhost or configure HTTPS proxy.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="single-feature text-center wow fadeInUp" data-wow-delay=".8s">
+              <div class="icon">
+                <i class="lni lni-code-alt"></i>
+              </div>
+              <div class="content">
+                <h5 class="mb-25" data-i18n="howItWorks.step4.title">4. Query</h5>
+                <p data-i18n="howItWorks.step4.description">Use OData syntax to query your data: $select, $filter, $top, $orderby. Insert and update via JSON.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <!-- ========================= how-it-works end ========================= -->
 
               <div class="container pt-60 pb-60">
-                <h4 class="wow fadeInUp" data-wow-delay=".2s">You're Using</h4>
-                <h2 class="mb-30 wow fadeInUp" data-wow-delay=".4s">Free Lite Version of Template</h2>
-                <p class="mb-50 wow fadeInUp" data-wow-delay=".6s">Please, purchase full version of the template to get all sections, features and permission to remove footer credit</p>
+                <h4 class="wow fadeInUp" data-wow-delay=".2s" data-i18n="newFeatures.subtitle">New Features</h4>
+                <h2 class="mb-30 wow fadeInUp" data-wow-delay=".4s" data-i18n="newFeatures.title">Latest Updates</h2>
+                <p class="mb-50 wow fadeInUp" data-wow-delay=".6s" data-i18n="newFeatures.description">Custom SQL-based Data Access Layer for improved concurrency. Native DB drivers with explicit pooling. JWT-Based Authentication. HTTPS Proxy integration. Cross-platform compatibility (Windows/Linux x64).</p>
                 <div class="buttons">
-                  <a href="https://rebrand.ly/flat-ud/" rel="nofollow" target="blank" class="button button-lg radius-10 wow fadeInUp" data-wow-delay=".7s">Purchase Now</a>
+                  <a href="#contact" class="button button-lg radius-10 wow fadeInUp" data-wow-delay=".7s" data-i18n="newFeatures.cta">Get Started</a>
                 </div>
               </div>
 
@@ -245,63 +488,46 @@
         <div class="row justify-content-center">
           <div class="col-xxl-5 col-xl-5 col-lg-7 col-md-10">
             <div class="section-title text-center mb-60">
-              <h3 class="mb-15 wow fadeInUp" data-wow-delay=".2s">Pricing Plan</h3>
-              <p class="wow fadeInUp" data-wow-delay=".4s">Stop wasting time and money designing and managing a website that doesn’t get results. Happiness guaranteed!</p>
+              <h3 class="mb-15 wow fadeInUp" data-wow-delay=".2s" data-i18n="license.title">License</h3>
+              <p class="wow fadeInUp" data-wow-delay=".4s" data-i18n="license.subtitle">PulseConnector is free for non-commercial use. Commercial use requires prior written authorization from the author.</p>
             </div>
           </div>
         </div>
 
         <div class="row justify-content-center">
           <div class="col-lg-4 col-md-8 col-sm-10">
-            <div class="single-pricing wow fadeInUp" data-wow-delay=".2s">
+            <div class="single-pricing active wow fadeInUp" data-wow-delay=".2s">
+              <span class="button button-sm radius-30 popular-badge">Popular</span>
               <div class="image">
                 <img src="assets/img/pricing/pricing-1/pricing-1.svg" alt="">
               </div>
-              <h6>Basic Design</h6>
-              <h4>Web Design</h4>
-              <h3>$ 29.00</h3>
+              <h6 data-i18n="license.free.type">Non-Commercial</h6>
+              <h4 data-i18n="license.free.title">Free License</h4>
+              <h3 data-i18n="license.free.price">Free</h3>
               <ul>
-                <li> <i class="lni lni-checkmark-circle"></i> Carefully crafted components</li>
-                <li> <i class="lni lni-checkmark-circle"></i> Amazing page examples</li>
-                <li> <i class="lni lni-checkmark-circle"></i> Super friendly support team</li>
-                <li> <i class="lni lni-checkmark-circle"></i> Awesome Support</li>
+                <li> <i class="lni lni-checkmark-circle"></i> <span data-i18n="license.free.feature1">Full feature access</span></li>
+                <li> <i class="lni lni-checkmark-circle"></i> <span data-i18n="license.free.feature2">Multi-database support</span></li>
+                <li> <i class="lni lni-checkmark-circle"></i> <span data-i18n="license.free.feature3">SSH tunnel security</span></li>
+                <li> <i class="lni lni-checkmark-circle"></i> <span data-i18n="license.free.feature4">OData API endpoints</span></li>
               </ul>
-              <a href="#0" class="button radius-30">Get Started</a>
+              <a href="#contact" class="button radius-30" data-i18n="license.free.cta">Download</a>
             </div>
           </div>
           <div class="col-lg-4 col-md-8 col-sm-10">
-            <div class="single-pricing active wow fadeInUp" data-wow-delay=".4s">
-              <span class="button button-sm radius-30 popular-badge">Popular</span>
+            <div class="single-pricing wow fadeInUp" data-wow-delay=".4s">
               <div class="image">
                 <img src="assets/img/pricing/pricing-1/pricing-2.svg" alt="">
               </div>
-              <h6>Standard Design</h6>
-              <h4>Web Development</h4>
-              <h3>$ 89.00</h3>
+              <h6 data-i18n="license.commercial.type">Business Use</h6>
+              <h4 data-i18n="license.commercial.title">Commercial License</h4>
+              <h3 data-i18n="license.commercial.price">Contact Us</h3>
               <ul>
-                <li> <i class="lni lni-checkmark-circle"></i> Carefully crafted components</li>
-                <li> <i class="lni lni-checkmark-circle"></i> Amazing page examples</li>
-                <li> <i class="lni lni-checkmark-circle"></i> Super friendly support team</li>
-                <li> <i class="lni lni-checkmark-circle"></i> Awesome Support</li>
+                <li> <i class="lni lni-checkmark-circle"></i> <span data-i18n="license.commercial.feature1">All free features included</span></li>
+                <li> <i class="lni lni-checkmark-circle"></i> <span data-i18n="license.commercial.feature2">Commercial usage rights</span></li>
+                <li> <i class="lni lni-checkmark-circle"></i> <span data-i18n="license.commercial.feature3">Priority support</span></li>
+                <li> <i class="lni lni-checkmark-circle"></i> <span data-i18n="license.commercial.feature4">Custom integrations</span></li>
               </ul>
-              <a href="#0" class="button radius-30">Get Started</a>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-8 col-sm-10">
-            <div class="single-pricing wow fadeInUp" data-wow-delay=".6s">
-              <div class="image">
-                <img src="assets/img/pricing/pricing-1/pricing-3.svg" alt="">
-              </div>
-              <h6>Pro Design</h6>
-              <h4>Design & Develop</h4>
-              <h3>$ 199.00</h3>
-              <ul>
-                <li> <i class="lni lni-checkmark-circle"></i> Carefully crafted components</li>
-                <li> <i class="lni lni-checkmark-circle"></i> Amazing page examples</li>
-                <li> <i class="lni lni-checkmark-circle"></i> Super friendly support team</li>
-                <li> <i class="lni lni-checkmark-circle"></i> Awesome Support</li>
-              </ul>
-              <a href="#0" class="button radius-30">Get Started</a>
+              <a href="#contact" class="button radius-30" data-i18n="license.commercial.cta">Contact</a>
             </div>
           </div>
         </div>
@@ -316,12 +542,12 @@
         <div class="row justify-content-center">
           <div class="col-xxl-5 col-xl-5 col-lg-7 col-md-10">
             <div class="section-title text-center mb-60">
-              <h3 class="mb-15 wow fadeInUp" data-wow-delay=".2s">Our Team</h3>
-              <p class="wow fadeInUp" data-wow-delay=".4s">Stop wasting time and money designing and managing a website that doesn’t get results. Happiness guaranteed!</p>
+              <h3 class="mb-15 wow fadeInUp" data-wow-delay=".2s" data-i18n="team.title">Our Team</h3>
+              <p class="wow fadeInUp" data-wow-delay=".4s" data-i18n="team.subtitle">Meet the people behind PulseConnector.</p>
             </div>
           </div>
         </div>
-        
+
         <div class="row justify-content-center">
           <div class="col-xl-3 col-md-6 col-sm-10">
             <div class="single-team wow fadeInUp" data-wow-delay=".2s">
@@ -329,17 +555,11 @@
                 <img src="assets/img/team/team-1/team-1.png" alt="">
               </div>
               <div class="info">
-                <h6>John Doe</h6>
-                <p>Product Designer</p>
+                <h6>Team Member</h6>
+                <p data-i18n="team.lead">Lead Developer</p>
                 <ul class="socials">
                   <li>
-                    <a href="#0"> <i class="lni lni-facebook-filled"></i> </a>
-                  </li>
-                  <li>
-                    <a href="#0"> <i class="lni lni-twitter-filled"></i> </a>
-                  </li>
-                  <li>
-                    <a href="#0"> <i class="lni lni-instagram-filled"></i> </a>
+                    <a href="#0"> <i class="lni lni-github-original"></i> </a>
                   </li>
                   <li>
                     <a href="#0"> <i class="lni lni-linkedin-original"></i> </a>
@@ -354,17 +574,11 @@
                 <img src="assets/img/team/team-1/team-2.png" alt="">
               </div>
               <div class="info">
-                <h6>David Endow</h6>
-                <p>Creative Designer</p>
+                <h6>Team Member</h6>
+                <p data-i18n="team.backend">Backend Developer</p>
                 <ul class="socials">
                   <li>
-                    <a href="#0"> <i class="lni lni-facebook-filled"></i> </a>
-                  </li>
-                  <li>
-                    <a href="#0"> <i class="lni lni-twitter-filled"></i> </a>
-                  </li>
-                  <li>
-                    <a href="#0"> <i class="lni lni-instagram-filled"></i> </a>
+                    <a href="#0"> <i class="lni lni-github-original"></i> </a>
                   </li>
                   <li>
                     <a href="#0"> <i class="lni lni-linkedin-original"></i> </a>
@@ -379,17 +593,11 @@
                 <img src="assets/img/team/team-1/team-3.png" alt="">
               </div>
               <div class="info">
-                <h6>Jonathon Smith</h6>
-                <p>Brand Designer</p>
+                <h6>Team Member</h6>
+                <p data-i18n="team.frontend">Frontend Developer</p>
                 <ul class="socials">
                   <li>
-                    <a href="#0"> <i class="lni lni-facebook-filled"></i> </a>
-                  </li>
-                  <li>
-                    <a href="#0"> <i class="lni lni-twitter-filled"></i> </a>
-                  </li>
-                  <li>
-                    <a href="#0"> <i class="lni lni-instagram-filled"></i> </a>
+                    <a href="#0"> <i class="lni lni-github-original"></i> </a>
                   </li>
                   <li>
                     <a href="#0"> <i class="lni lni-linkedin-original"></i> </a>
@@ -404,17 +612,11 @@
                 <img src="assets/img/team/team-1/team-4.png" alt="">
               </div>
               <div class="info">
-                <h6>Gray Simon</h6>
-                <p>Frontend Developer</p>
+                <h6>Team Member</h6>
+                <p data-i18n="team.devops">DevOps Engineer</p>
                 <ul class="socials">
                   <li>
-                    <a href="#0"> <i class="lni lni-facebook-filled"></i> </a>
-                  </li>
-                  <li>
-                    <a href="#0"> <i class="lni lni-twitter-filled"></i> </a>
-                  </li>
-                  <li>
-                    <a href="#0"> <i class="lni lni-instagram-filled"></i> </a>
+                    <a href="#0"> <i class="lni lni-github-original"></i> </a>
                   </li>
                   <li>
                     <a href="#0"> <i class="lni lni-linkedin-original"></i> </a>
@@ -430,13 +632,112 @@
     <!-- ========================= team style-1 end ========================= -->
 
               <div class="container pt-60 pb-60">
-                <h4 class="wow fadeInUp" data-wow-delay=".2s">You're Using</h4>
-                <h2 class="mb-30 wow fadeInUp" data-wow-delay=".4s">Free Lite Version of Template</h2>
-                <p class="mb-50 wow fadeInUp" data-wow-delay=".6s">Please, purchase full version of the template to get all sections, features and permission to remove footer credit</p>
+                <h4 class="wow fadeInUp" data-wow-delay=".2s" data-i18n="odata.subtitle">OData Queries</h4>
+                <h2 class="mb-30 wow fadeInUp" data-wow-delay=".4s" data-i18n="odata.title">Powerful Query Support</h2>
+                <p class="mb-50 wow fadeInUp" data-wow-delay=".6s" data-i18n="odata.description">Use $select, $filter, $top, $orderby and combinations. Support for eq, ne, gt, lt, ge, le, like operators. Insert, Update (PUT/PATCH) operations via JSON.</p>
                 <div class="buttons">
-                  <a href="https://rebrand.ly/flat-ud/" rel="nofollow" target="blank" class="button button-lg radius-10 wow fadeInUp" data-wow-delay=".7s">Purchase Now</a>
+                  <a href="#contact" class="button button-lg radius-10 wow fadeInUp" data-wow-delay=".7s" data-i18n="odata.cta">Get Started</a>
                 </div>
               </div>
+
+    <!-- ========================= faq start ========================= -->
+    <section id="faq" class="pt-100 pb-100">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-xxl-6 col-xl-6 col-lg-8 col-md-10">
+            <div class="section-title text-center mb-60">
+              <h3 class="mb-15 wow fadeInUp" data-wow-delay=".2s" data-i18n="faq.title">Frequently Asked Questions</h3>
+              <p class="wow fadeInUp" data-wow-delay=".4s" data-i18n="faq.subtitle">Find answers to common questions about PulseConnector.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <div class="accordion" id="faqAccordion">
+
+              <div class="card mb-3 wow fadeInUp" data-wow-delay=".2s">
+                <div class="card-header" id="faq1">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" data-i18n="faq.q1.question">
+                      What databases does PulseConnector support?
+                    </button>
+                  </h5>
+                </div>
+                <div id="collapse1" class="collapse show" aria-labelledby="faq1" data-parent="#faqAccordion">
+                  <div class="card-body" data-i18n="faq.q1.answer">
+                    PulseConnector supports MySQL, MariaDB, PostgreSQL, and Microsoft SQL Server. You can easily switch between databases by changing the active_dialect in your config.json file.
+                  </div>
+                </div>
+              </div>
+
+              <div class="card mb-3 wow fadeInUp" data-wow-delay=".3s">
+                <div class="card-header" id="faq2">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse2" aria-expanded="false" data-i18n="faq.q2.question">
+                      How do I secure my database connection?
+                    </button>
+                  </h5>
+                </div>
+                <div id="collapse2" class="collapse" aria-labelledby="faq2" data-parent="#faqAccordion">
+                  <div class="card-body" data-i18n="faq.q2.answer">
+                    PulseConnector provides built-in SSH tunnels for secure connectivity. All tunnels use encrypted SSH connections, so you don't need to open public ports on your local network. Additionally, JWT-based authentication protects your OData endpoints.
+                  </div>
+                </div>
+              </div>
+
+              <div class="card mb-3 wow fadeInUp" data-wow-delay=".4s">
+                <div class="card-header" id="faq3">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse3" aria-expanded="false" data-i18n="faq.q3.question">
+                      What OData operations are supported?
+                    </button>
+                  </h5>
+                </div>
+                <div id="collapse3" class="collapse" aria-labelledby="faq3" data-parent="#faqAccordion">
+                  <div class="card-body" data-i18n="faq.q3.answer">
+                    PulseConnector supports $select, $filter, $top, and $orderby for queries. Filter operators include eq, ne, gt, lt, ge, le, and like. You can also perform INSERT (POST), full UPDATE (PUT), and partial UPDATE (PATCH) operations via JSON.
+                  </div>
+                </div>
+              </div>
+
+              <div class="card mb-3 wow fadeInUp" data-wow-delay=".5s">
+                <div class="card-header" id="faq4">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse4" aria-expanded="false" data-i18n="faq.q4.question">
+                      Which platforms are supported?
+                    </button>
+                  </h5>
+                </div>
+                <div id="collapse4" class="collapse" aria-labelledby="faq4" data-parent="#faqAccordion">
+                  <div class="card-body" data-i18n="faq.q4.answer">
+                    PulseConnector is compatible with Windows and Linux x64 systems. The package installation includes embedded libraries, and the lightweight Waitress backend ensures consistent performance across both platforms.
+                  </div>
+                </div>
+              </div>
+
+              <div class="card mb-3 wow fadeInUp" data-wow-delay=".6s">
+                <div class="card-header" id="faq5">
+                  <h5 class="mb-0">
+                    <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse5" aria-expanded="false" data-i18n="faq.q5.question">
+                      Is PulseConnector free to use?
+                    </button>
+                  </h5>
+                </div>
+                <div id="collapse5" class="collapse" aria-labelledby="faq5" data-parent="#faqAccordion">
+                  <div class="card-body" data-i18n="faq.q5.answer">
+                    Yes, PulseConnector is free for non-commercial use. Commercial use requires prior written authorization from the author. Contact us for commercial licensing options.
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+    <!-- ========================= faq end ========================= -->
 
     <!-- ========================= contact style-6 start ========================= -->
     <section id="contact" class="contact-section contact-style-6">
@@ -448,42 +749,42 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div class="single-input">
-                      <label for="name">Name</label>
-                      <input type="text" id="name" name="name" class="form-input" placeholder="Name">
+                      <label for="name" data-i18n="contact.form.name">Name</label>
+                      <input type="text" id="name" name="name" class="form-input" placeholder="Name" data-i18n-placeholder="contact.form.name">
                       <i class="lni lni-user"></i>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="single-input">
-                      <label for="email">Email</label>
-                      <input type="email" id="email" name="email" class="form-input" placeholder="Email">
+                      <label for="email" data-i18n="contact.form.email">Email</label>
+                      <input type="email" id="email" name="email" class="form-input" placeholder="Email" data-i18n-placeholder="contact.form.email">
                       <i class="lni lni-envelope"></i>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="single-input">
-                      <label for="number">Number</label>
-                      <input type="text" id="number" name="number" class="form-input" placeholder="Number">
+                      <label for="number" data-i18n="contact.form.number">Number</label>
+                      <input type="text" id="number" name="number" class="form-input" placeholder="Number" data-i18n-placeholder="contact.form.number">
                       <i class="lni lni-phone"></i>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="single-input">
-                      <label for="subject">Subject</label>
-                      <input type="text" id="subject" name="subject" class="form-input" placeholder="Subject">
+                      <label for="subject" data-i18n="contact.form.subject">Subject</label>
+                      <input type="text" id="subject" name="subject" class="form-input" placeholder="Subject" data-i18n-placeholder="contact.form.subject">
                       <i class="lni lni-text-format"></i>
                     </div>
                   </div>
                   <div class="col-md-12">
                     <div class="single-input">
-                      <label for="message">Message</label>
-                      <textarea name="message" id="message" class="form-input" placeholder="Message" rows="6"></textarea>
+                      <label for="message" data-i18n="contact.form.message">Message</label>
+                      <textarea name="message" id="message" class="form-input" placeholder="Message" data-i18n-placeholder="contact.form.message" rows="6"></textarea>
                       <i class="lni lni-comments-alt"></i>
                     </div>
                   </div>
                   <div class="col-md-12">
                     <div class="form-button">
-                      <button type="submit" class="button radius-10">Submit <i class="lni lni-telegram-original"></i> </button>
+                      <button type="submit" class="button radius-10"><span data-i18n="contact.form.submit">Submit</span> <i class="lni lni-telegram-original"></i> </button>
                     </div>
                   </div>
                 </div>
@@ -495,17 +796,17 @@
           <div class="col-lg-5 order-first order-lg-last">
             <div class="left-wrapper">
               <div class="section-title mb-40">
-                <h3 class="mb-15">Get in touch</h3>
-                <p>Stop wasting time and money designing and managing a website that doesn’t get results. Happiness guaranteed!</p>
+                <h3 class="mb-15" data-i18n="contact.title">Get in touch</h3>
+                <p data-i18n="contact.subtitle">Have questions about PulseConnector? Need help with integration or commercial licensing? Contact us!</p>
               </div>
               <div class="row">
                 <div class="col-lg-12 col-md-6">
                   <div class="single-item">
                     <div class="icon">
-                      <i class="lni lni-phone"></i>
+                      <i class="lni lni-world"></i>
                     </div>
                     <div class="text">
-                      <p>0045939863784</p>
+                      <p>pulseconnector.ecuarobot.com</p>
                     </div>
                   </div>
                 </div>
@@ -515,17 +816,17 @@
                       <i class="lni lni-envelope"></i>
                     </div>
                     <div class="text">
-                      <p>yourmail@gmail.com</p>
+                      <p>contact@ecuarobot.com</p>
                     </div>
                   </div>
                 </div>
                 <div class="col-lg-12 col-md-6">
                   <div class="single-item">
                     <div class="icon">
-                      <i class="lni lni-map-marker"></i>
+                      <i class="lni lni-github-original"></i>
                     </div>
                     <div class="text">
-                      <p>John's House, 13/5 Road, Sidny United State Of America</p>
+                      <p>GitHub Repository</p>
                     </div>
                   </div>
                 </div>
@@ -559,54 +860,52 @@
             <div class="col-xl-3 col-lg-4 col-md-6">
               <div class="footer-widget wow fadeInUp" data-wow-delay=".2s">
                 <div class="logo">
-                  <a href="#0"> <img src="assets/img/logo/logo.svg" alt=""> </a>
+                  <a href="#0"> <img src="assets/img/images/icon.png" alt="PulseConnector" style="max-height: 50px;"> </a>
                 </div>
-                <p class="desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisis nulla placerat amet amet congue.</p>
+                <p class="desc" data-i18n="footer.description">PulseConnector is a lightweight Python database connector that transforms your data into a ready-to-use OData API in minutes.</p>
                 <ul class="socials">
-                  <li> <a href="#0"> <i class="lni lni-facebook-filled"></i> </a> </li>
-                  <li> <a href="#0"> <i class="lni lni-twitter-filled"></i> </a> </li>
-                  <li> <a href="#0"> <i class="lni lni-instagram-filled"></i> </a> </li>
+                  <li> <a href="#0"> <i class="lni lni-github-original"></i> </a> </li>
                   <li> <a href="#0"> <i class="lni lni-linkedin-original"></i> </a> </li>
                 </ul>
               </div>
             </div>
             <div class="col-xl-2 offset-xl-1 col-lg-2 col-md-6 col-sm-6">
               <div class="footer-widget wow fadeInUp" data-wow-delay=".3s">
-                <h6>Quick Link</h6>
+                <h6 data-i18n="footer.quickLinks">Quick Link</h6>
                 <ul class="links">
-                  <li> <a href="#0">Home</a> </li>
-                  <li> <a href="#0">About</a> </li>
-                  <li> <a href="#0">Service</a> </li>
-                  <li> <a href="#0">Contact</a> </li>
+                  <li> <a href="#home" data-i18n="nav.home">Home</a> </li>
+                  <li> <a href="#services" data-i18n="footer.features">Features</a> </li>
+                  <li> <a href="#how-it-works" data-i18n="nav.howItWorks">How it Works</a> </li>
+                  <li> <a href="#contact" data-i18n="nav.contact">Contact</a> </li>
                 </ul>
               </div>
             </div>
             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
               <div class="footer-widget wow fadeInUp" data-wow-delay=".4s">
-                <h6>Services</h6>
+                <h6 data-i18n="footer.features">Features</h6>
                 <ul class="links">
-                  <li> <a href="#0">Web Design</a> </li>
-                  <li> <a href="#0">Web Development</a> </li>
-                  <li> <a href="#0">Seo Optimization</a> </li>
-                  <li> <a href="#0">Blog Writing</a> </li>
+                  <li> <a href="#databases" data-i18n="databases.title">Supported Databases</a> </li>
+                  <li> <a href="#services" data-i18n="features.ssh.title">SSH Tunnels</a> </li>
+                  <li> <a href="#services">OData API</a> </li>
+                  <li> <a href="#faq">FAQ</a> </li>
                 </ul>
               </div>
             </div>
             <div class="col-xl-3 col-lg-3 col-md-6">
               <div class="footer-widget wow fadeInUp" data-wow-delay=".5s">
-                <h6>Help & Support</h6>
+                <h6 data-i18n="footer.resources">Resources</h6>
                 <ul class="links">
-                  <li> <a href="#0">Support Center</a> </li>
-                  <li> <a href="#0">Live Chat</a> </li>
-                  <li> <a href="#0">FAQ</a> </li>
-                  <li> <a href="#0">Terms & Conditions</a> </li>
+                  <li> <a href="documentation.html" data-i18n="footer.documentation">Documentation</a> </li>
+                  <li> <a href="#0" data-i18n="footer.benchmark">Benchmark</a> </li>
+                  <li> <a href="#0" data-i18n="footer.installer">Installer</a> </li>
+                  <li> <a href="#pricing" data-i18n="license.title">License</a> </li>
                 </ul>
               </div>
             </div>
           </div>
         </div>
         <div class="copyright-wrapper wow fadeInUp" data-wow-delay=".2s">
-          <p>Design and Developed by <a href="https://uideck.com" rel="nofollow" target="_blank">UIdeck</a> Built-with <a href="#">Lindy UI Kit</a>. Distibuted by <a href="https://themewagon.com" target="_blank">ThemeWagon</a></p>
+          <p>Diseñado por PulseConnector</p>
         </div>
       </div>
     </footer>
@@ -622,5 +921,6 @@
     <script src="assets/js/count-up.min.js"></script>
     <script src="assets/js/wow.min.js"></script>
     <script src="assets/js/main.js"></script>
+    <script src="assets/js/i18n.js"></script>
   </body>
 </html>

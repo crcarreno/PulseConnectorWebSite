@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html class="no-js" lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>Documentation - PulseConnector</title>
+    <meta name="description" content="PulseConnector documentation - Learn how to configure and use PulseConnector to create OData APIs from your databases." />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="assets/img/images/icon.png" />
+
+    <!-- ========================= CSS here ========================= -->
+    <link rel="stylesheet" href="assets/css/bootstrap-5.0.0-alpha-2.min.css" />
+    <link rel="stylesheet" href="assets/css/LineIcons.2.0.css"/>
+    <link rel="stylesheet" href="assets/css/animate.css"/>
+    <link rel="stylesheet" href="assets/css/lindy-uikit.css"/>
+    <style>
+      .doc-section {
+        padding: 40px 0;
+        border-bottom: 1px solid #e5e5e5;
+      }
+      .doc-section:last-child {
+        border-bottom: none;
+      }
+      .code-block {
+        background-color: #2d2d2d;
+        color: #f8f8f2;
+        padding: 20px;
+        border-radius: 8px;
+        overflow-x: auto;
+        font-family: 'Fira Code', monospace;
+        font-size: 14px;
+        margin: 20px 0;
+        position: relative;
+      }
+      .code-block code {
+        color: #f8f8f2;
+      }
+      .copy-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #444;
+        color: #fff;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 4px;
+        font-size: 12px;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.3s, background-color 0.3s;
+      }
+      .code-block:hover .copy-btn {
+        opacity: 1;
+      }
+      .copy-btn:hover {
+        background-color: #5767f9;
+      }
+      .copy-btn.copied {
+        background-color: #49cc90;
+      }
+      .doc-sidebar {
+        position: sticky;
+        top: 100px;
+      }
+      .doc-sidebar ul {
+        list-style: none;
+        padding: 0;
+      }
+      .doc-sidebar ul li {
+        margin-bottom: 10px;
+      }
+      .doc-sidebar ul li a {
+        color: #585978;
+        text-decoration: none;
+        transition: all 0.3s;
+      }
+      .doc-sidebar ul li a:hover,
+      .doc-sidebar ul li a.active {
+        color: #5767f9;
+        font-weight: 600;
+      }
+      .doc-title {
+        color: #2c2c51;
+        margin-bottom: 20px;
+      }
+      .doc-subtitle {
+        color: #5767f9;
+        margin-top: 30px;
+        margin-bottom: 15px;
+      }
+      .table-params {
+        width: 100%;
+        margin: 20px 0;
+      }
+      .table-params th {
+        background-color: #f8f9fa;
+        padding: 12px;
+        text-align: left;
+        border-bottom: 2px solid #e5e5e5;
+      }
+      .table-params td {
+        padding: 12px;
+        border-bottom: 1px solid #e5e5e5;
+      }
+      .badge-method {
+        padding: 4px 10px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .badge-get { background-color: #61affe; color: white; }
+      .badge-post { background-color: #49cc90; color: white; }
+      .badge-put { background-color: #fca130; color: white; }
+      .badge-patch { background-color: #50e3c2; color: white; }
+
+      /* Language Selector */
+      .lang-selector {
+        margin-left: 15px;
+        position: relative;
+      }
+      .lang-dropdown {
+        position: relative;
+        display: inline-block;
+      }
+      .lang-current {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        background-color: transparent;
+        border: 1px solid rgba(0,0,0,0.15);
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 14px;
+        color: #333;
+        transition: all 0.3s ease;
+      }
+      .lang-current:hover {
+        border-color: #5767f9;
+        background-color: rgba(87, 103, 249, 0.05);
+      }
+      .lang-current .flag {
+        font-size: 18px;
+        line-height: 1;
+      }
+      .lang-current .arrow {
+        font-size: 10px;
+        margin-left: 4px;
+        transition: transform 0.3s ease;
+      }
+      .lang-dropdown.open .lang-current .arrow {
+        transform: rotate(180deg);
+      }
+      .lang-options {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        margin-top: 5px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+        min-width: 150px;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+        z-index: 1000;
+        overflow: hidden;
+      }
+      .lang-dropdown.open .lang-options {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+      .lang-option {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 15px;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        font-size: 14px;
+        color: #333;
+      }
+      .lang-option:hover {
+        background-color: #f5f5f5;
+      }
+      .lang-option.active {
+        background-color: #5767f9;
+        color: #fff;
+      }
+      .lang-option .flag {
+        font-size: 20px;
+        line-height: 1;
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- ========================= header start ========================= -->
+    <header class="header header-2">
+      <div class="navbar-area">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-lg-12">
+              <nav class="navbar navbar-expand-lg">
+                <a class="navbar-brand" href="index.html">
+                  <img src="assets/img/images/icon.png" alt="PulseConnector" style="max-height: 45px;" />
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent2" aria-controls="navbarSupportedContent2" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="toggler-icon"></span>
+                  <span class="toggler-icon"></span>
+                  <span class="toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent2">
+                  <ul id="nav2" class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                      <a class="page-scroll" href="index.html" data-i18n="nav.home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="page-scroll active" href="documentation.html" data-i18n="nav.docs">Documentation</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="page-scroll" href="index.html#pricing" data-i18n="license.title">License</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="page-scroll" href="index.html#contact" data-i18n="nav.contact">Contact</a>
+                    </li>
+                  </ul>
+                  <a href="index.html#contact" class="button button-sm radius-10 d-none d-lg-flex" data-i18n="nav.download">Download</a>
+                  <!-- Language Selector -->
+                  <div class="lang-selector">
+                    <div class="lang-dropdown" id="langDropdown">
+                      <div class="lang-current" id="langCurrent">
+                        <span class="flag">🇺🇸</span>
+                        <span class="code">EN</span>
+                        <span class="arrow">▼</span>
+                      </div>
+                      <div class="lang-options">
+                        <div class="lang-option" data-lang="en"><span class="flag">🇺🇸</span><span>English</span></div>
+                        <div class="lang-option" data-lang="es"><span class="flag">🇪🇸</span><span>Español</span></div>
+                        <div class="lang-option" data-lang="pt"><span class="flag">🇧🇷</span><span>Português</span></div>
+                        <div class="lang-option" data-lang="fr"><span class="flag">🇫🇷</span><span>Français</span></div>
+                        <div class="lang-option" data-lang="it"><span class="flag">🇮🇹</span><span>Italiano</span></div>
+                        <div class="lang-option" data-lang="ja"><span class="flag">🇯🇵</span><span>日本語</span></div>
+                        <div class="lang-option" data-lang="zh"><span class="flag">🇨🇳</span><span>中文</span></div>
+                        <div class="lang-option" data-lang="de"><span class="flag">🇩🇪</span><span>Deutsch</span></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- ========================= header end ========================= -->
+
+    <!-- ========================= documentation hero start ========================= -->
+    <section class="pt-150 pb-50" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <h1 class="text-white mb-20" data-i18n="docs.title">Documentation</h1>
+            <p class="text-white" style="opacity: 0.9;" data-i18n="docs.subtitle">Complete guide to configure and use PulseConnector for your OData API needs.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ========================= documentation hero end ========================= -->
+
+    <!-- ========================= documentation content start ========================= -->
+    <section class="pt-60 pb-100">
+      <div class="container">
+        <div class="row">
+
+          <!-- Sidebar -->
+          <div class="col-lg-3">
+            <div class="doc-sidebar">
+              <h6 class="mb-20" data-i18n="docs.contents">Contents</h6>
+              <ul>
+                <li><a href="#getting-started" data-i18n="docs.gettingStarted">Getting Started</a></li>
+                <li><a href="#configuration" data-i18n="docs.configuration">Configuration</a></li>
+                <li><a href="#authentication" data-i18n="docs.authentication">Authentication</a></li>
+                <li><a href="#odata-queries" data-i18n="docs.odataQueries">OData Queries</a></li>
+                <li><a href="#insert-update" data-i18n="docs.insertUpdate">Insert & Update</a></li>
+                <li><a href="#server-config" data-i18n="docs.serverConfig">Server Configuration</a></li>
+                <li><a href="#components" data-i18n="docs.components">Main Components</a></li>
+                <li><a href="#security" data-i18n="docs.security">Security</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Content -->
+          <div class="col-lg-9">
+
+            <!-- Getting Started -->
+            <div id="getting-started" class="doc-section">
+              <h2 class="doc-title" data-i18n="docs.gettingStarted">Getting Started</h2>
+              <p data-i18n="docs.gettingStartedDesc">PulseConnector is a lightweight Python database connector that transforms your data into a ready-to-use OData API in minutes.</p>
+
+              <div class="text-center my-4">
+                <img src="assets/img/images/general_architecture.png" alt="General Architecture" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                <p class="text-muted mt-2"><small data-i18n="docs.generalArchitecture">General Architecture</small></p>
+              </div>
+
+              <h4 class="doc-subtitle" data-i18n="docs.testLocalServer">Test Local Server</h4>
+              <p data-i18n="docs.testLocalServerDesc">Once installed, you can test your server at the following endpoints:</p>
+              <ul>
+                <li><strong data-i18n="docs.local">Local:</strong> <code>http://localhost:4545/status</code></li>
+                <li><strong data-i18n="docs.remote">Remote:</strong> <code>https://localhost:5000/status</code></li>
+              </ul>
+            </div>
+
+            <!-- Configuration -->
+            <div id="configuration" class="doc-section">
+              <h2 class="doc-title" data-i18n="docs.configuration">Configuration</h2>
+              <p data-i18n="docs.configurationDesc">PulseConnector uses a config.json file for all settings. Below is a complete example:</p>
+
+              <div class="code-block">
+<pre>{
+    "ssh": {
+        "enabled": true,
+        "vps_host": "0.0.0.0",
+        "vps_user": "user",
+        "vps_pass": "root",
+        "remote_db_port": 3306,
+        "local_bind_port": 5001
+    },
+    "db_mysql": {
+        "dialect": "mysql",
+        "host": "127.0.0.1",
+        "port": 3306,
+        "user": "root",
+        "pass": "root",
+        "database": "northwind"
+    },
+    "db_postgres": {
+        "dialect": "postgres",
+        "host": "127.0.0.1",
+        "port": 5432,
+        "user": "postgres",
+        "pass": "postgres",
+        "database": "postgres"
+    },
+    "db_mssql": {
+        "dialect": "mssql",
+        "host": "127.0.0.1",
+        "port": 1433,
+        "user": "sa",
+        "pass": "admin.1234",
+        "database": "dbTest"
+    },
+    "server": {
+        "host": "127.0.0.1",
+        "port": 5000,
+        "protocol": "http",
+        "threads": 8,
+        "connection_limit": 100,
+        "backlog": 512,
+        "channel_timeout": 60,
+        "cleanup_interval": 30
+    },
+    "odata": {
+        "pool_size": 20,
+        "max_overflow": 10,
+        "pool_timeout": 10,
+        "pool_recycle": 1800,
+        "pool_pre_ping": true
+    },
+    "active_dialect": "mssql"
+}</pre>
+              </div>
+
+              <h4 class="doc-subtitle" data-i18n="docs.dbConfigParams">Database Configuration Parameters</h4>
+              <table class="table-params">
+                <thead>
+                  <tr>
+                    <th data-i18n="docs.parameter">Parameter</th>
+                    <th data-i18n="docs.description">Description</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td><code>dialect</code></td><td data-i18n="docs.dialectDesc">Database type: mysql, postgres, mssql</td></tr>
+                  <tr><td><code>host</code></td><td data-i18n="docs.hostDesc">Database server address</td></tr>
+                  <tr><td><code>port</code></td><td data-i18n="docs.portDesc">Database port number</td></tr>
+                  <tr><td><code>user</code></td><td data-i18n="docs.userDesc">Database username</td></tr>
+                  <tr><td><code>pass</code></td><td data-i18n="docs.passDesc">Database password</td></tr>
+                  <tr><td><code>database</code></td><td data-i18n="docs.databaseDesc">Database name</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Authentication -->
+            <div id="authentication" class="doc-section">
+              <h2 class="doc-title" data-i18n="docs.authentication">Authentication</h2>
+              <p data-i18n="docs.authenticationDesc">PulseConnector uses JWT-based authentication to protect your OData endpoints.</p>
+
+              <h4 class="doc-subtitle" data-i18n="docs.generateToken">Generate Token</h4>
+              <p data-i18n="docs.generateTokenDesc">Send a POST request to the login endpoint:</p>
+              <p><span class="badge-method badge-post">POST</span> <code>https://localhost:5000/login</code></p>
+
+              <div class="code-block">
+<pre>{
+    "username": "admin",
+    "password": "admin"
+}</pre>
+              </div>
+
+              <div class="text-center my-4">
+                <img src="assets/img/images/screenshots/capture6.png" alt="Generate Token" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                <p class="text-muted mt-2"><small data-i18n="docs.generateTokenCaption">Generate Token using Postman</small></p>
+              </div>
+
+              <h4 class="doc-subtitle" data-i18n="docs.useToken">Use Token in Requests</h4>
+              <p data-i18n="docs.useTokenDesc">Include the token in the Authorization header:</p>
+              <div class="code-block">
+<pre>Authorization: Bearer &lt;your-token-here&gt;</pre>
+              </div>
+
+              <div class="text-center my-4">
+                <img src="assets/img/images/screenshots/capture7.png" alt="Use Bearer Token" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                <p class="text-muted mt-2"><small data-i18n="docs.useTokenCaption">Using Bearer Token in requests</small></p>
+              </div>
+            </div>
+
+            <!-- OData Queries -->
+            <div id="odata-queries" class="doc-section">
+              <h2 class="doc-title" data-i18n="docs.odataQueries">OData Queries</h2>
+              <p data-i18n="docs.odataQueriesDesc">PulseConnector supports standard OData query parameters.</p>
+
+              <h4 class="doc-subtitle" data-i18n="docs.selectColumns">$select - Select Columns</h4>
+              <p data-i18n="docs.selectColumnsDesc">Choose specific columns to return:</p>
+              <div class="code-block">
+<pre>GET /odata/customers?$select=id,company</pre>
+              </div>
+
+              <h4 class="doc-subtitle" data-i18n="docs.filterResults">$filter - Filter Results</h4>
+              <p data-i18n="docs.filterOperators">Available filter operators:</p>
+              <table class="table-params">
+                <thead>
+                  <tr>
+                    <th data-i18n="docs.operator">Operator</th>
+                    <th data-i18n="docs.description">Description</th>
+                    <th data-i18n="docs.example">Example</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td><code>eq</code></td><td data-i18n="docs.opEqual">Equal</td><td><code>$filter=status eq 'active'</code></td></tr>
+                  <tr><td><code>ne</code></td><td data-i18n="docs.opNotEqual">Not equal</td><td><code>$filter=status ne 'deleted'</code></td></tr>
+                  <tr><td><code>gt</code></td><td data-i18n="docs.opGreaterThan">Greater than</td><td><code>$filter=price gt 10</code></td></tr>
+                  <tr><td><code>lt</code></td><td data-i18n="docs.opLessThan">Less than</td><td><code>$filter=price lt 100</code></td></tr>
+                  <tr><td><code>ge</code></td><td data-i18n="docs.opGreaterEqual">Greater or equal</td><td><code>$filter=quantity ge 5</code></td></tr>
+                  <tr><td><code>le</code></td><td data-i18n="docs.opLessEqual">Less or equal</td><td><code>$filter=quantity le 50</code></td></tr>
+                  <tr><td><code>like</code></td><td data-i18n="docs.opLike">Pattern match</td><td><code>$filter=name like 'John%'</code></td></tr>
+                </tbody>
+              </table>
+
+              <div class="code-block">
+<pre># Filter examples
+/odata/products?$filter=price gt 10
+/odata/users?$filter=active eq true
+/odata/orders?$select=id,ship_name&$filter=ship_name like 'Karen%'</pre>
+              </div>
+
+              <h4 class="doc-subtitle" data-i18n="docs.limitResults">$top - Limit Results</h4>
+              <div class="code-block">
+<pre>GET /odata/logs?$top=50</pre>
+              </div>
+
+              <h4 class="doc-subtitle" data-i18n="docs.sortResults">$orderby - Sort Results</h4>
+              <div class="code-block">
+<pre># Descending order
+/odata/products?$orderby=price desc
+
+# Ascending order
+/odata/users?$orderby=name asc</pre>
+              </div>
+
+              <h4 class="doc-subtitle" data-i18n="docs.combinedQuery">Combined Query</h4>
+              <div class="code-block">
+<pre>GET /odata/products?$select=id,name,price&$filter=price gt 20&$orderby=price desc&$top=10</pre>
+              </div>
+
+              <div class="text-center my-4">
+                <img src="assets/img/images/screenshots/capture1.png" alt="OData Query Example" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                <p class="text-muted mt-2"><small data-i18n="docs.odataQueryCaption">OData query example in Postman</small></p>
+              </div>
+            </div>
+
+            <!-- Insert & Update -->
+            <div id="insert-update" class="doc-section">
+              <h2 class="doc-title" data-i18n="docs.insertUpdate">Insert & Update</h2>
+
+              <h4 class="doc-subtitle" data-i18n="docs.insertPost">Insert (POST)</h4>
+              <p><span class="badge-method badge-post">POST</span> <code>/odata/{table}</code></p>
+              <p data-i18n="docs.insertPostDesc">Send a JSON body with the new record data.</p>
+
+              <div class="text-center my-4">
+                <img src="assets/img/images/screenshots/capture3.png" alt="Insert POST" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                <p class="text-muted mt-2"><small data-i18n="docs.insertPostCaption">Insert operation using POST</small></p>
+              </div>
+
+              <h4 class="doc-subtitle" data-i18n="docs.fullUpdate">Full Update (PUT)</h4>
+              <p><span class="badge-method badge-put">PUT</span> <code>/odata/{table}({id})</code></p>
+              <p data-i18n="docs.fullUpdateDesc">Replace the entire record with new data.</p>
+
+              <div class="text-center my-4">
+                <img src="assets/img/images/screenshots/capture4.png" alt="Update PUT" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                <p class="text-muted mt-2"><small data-i18n="docs.fullUpdateCaption">Full update using PUT</small></p>
+              </div>
+
+              <h4 class="doc-subtitle" data-i18n="docs.partialUpdate">Partial Update (PATCH)</h4>
+              <p><span class="badge-method badge-patch">PATCH</span> <code>/odata/{table}({id})</code></p>
+              <p data-i18n="docs.partialUpdateDesc">Update only the specified fields.</p>
+
+              <div class="text-center my-4">
+                <img src="assets/img/images/screenshots/capture5.png" alt="Update PATCH" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                <p class="text-muted mt-2"><small data-i18n="docs.partialUpdateCaption">Partial update using PATCH</small></p>
+              </div>
+            </div>
+
+            <!-- Server Configuration -->
+            <div id="server-config" class="doc-section">
+              <h2 class="doc-title" data-i18n="docs.serverConfig">Server Configuration</h2>
+              <p data-i18n="docs.serverConfigDesc">Configure Waitress server for different load scenarios.</p>
+
+              <h4 class="doc-subtitle" data-i18n="docs.normalLoad">Normal Load</h4>
+              <div class="code-block">
+<pre>{
+    "host": "0.0.0.0",
+    "port": 5000,
+    "threads": 8,
+    "connection_limit": 100,
+    "backlog": 512,
+    "channel_timeout": 60,
+    "cleanup_interval": 30
+}</pre>
+              </div>
+
+              <h4 class="doc-subtitle" data-i18n="docs.highLoad">High Load</h4>
+              <div class="code-block">
+<pre>{
+    "host": "0.0.0.0",
+    "port": 5000,
+    "threads": 32,
+    "connection_limit": 1000,
+    "backlog": 2048,
+    "channel_timeout": 120,
+    "cleanup_interval": 30
+}</pre>
+              </div>
+
+              <h4 class="doc-subtitle" data-i18n="docs.odataPoolSettings">OData Pool Settings</h4>
+              <table class="table-params">
+                <thead>
+                  <tr>
+                    <th data-i18n="docs.parameter">Parameter</th>
+                    <th data-i18n="docs.normal">Normal</th>
+                    <th data-i18n="docs.highLoad">High Load</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td><code>pool_size</code></td><td>20</td><td>50</td></tr>
+                  <tr><td><code>max_overflow</code></td><td>10</td><td>100</td></tr>
+                  <tr><td><code>pool_timeout</code></td><td>10</td><td>30</td></tr>
+                  <tr><td><code>pool_recycle</code></td><td>1800</td><td>1800</td></tr>
+                  <tr><td><code>pool_pre_ping</code></td><td>true</td><td>true</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <!-- Main Components -->
+            <div id="components" class="doc-section">
+              <h2 class="doc-title" data-i18n="docs.components">Main Components</h2>
+              <ul>
+                <li><strong>JsonEditor:</strong> <span data-i18n="docs.jsonEditorDesc">Visual editor of config.json with an expanded, editable tree structure.</span></li>
+                <li><strong>SshTunnelManager:</strong> <span data-i18n="docs.sshTunnelDesc">Handles SSH forward and reverse tunnels from Python.</span></li>
+                <li><strong>build_connection_string(cfg):</strong> <span data-i18n="docs.buildConnDesc">Builds the connection string according to the selected dialect.</span></li>
+                <li><strong>PySide6 GUI:</strong> <span data-i18n="docs.pysideDesc">Dynamic interface with ComboBox populated from db_* sections in JSON.</span></li>
+                <li><strong>OData Service:</strong> <span data-i18n="docs.odataServiceDesc">Embedded OData service ready to expose your local database data.</span></li>
+              </ul>
+            </div>
+
+            <!-- Security -->
+            <div id="security" class="doc-section">
+              <h2 class="doc-title" data-i18n="docs.security">Security</h2>
+
+              <div class="text-center my-4">
+                <img src="assets/img/images/network_architecture.png" alt="Network Architecture" style="max-width: 100%; border-radius: 8px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                <p class="text-muted mt-2"><small data-i18n="docs.networkArchCaption">Network Architecture with SSH Tunnels</small></p>
+              </div>
+
+              <ul>
+                <li data-i18n="docs.secFeature1">All tunnels use encrypted SSH connections.</li>
+                <li data-i18n="docs.secFeature2">No need to open public ports on your local network.</li>
+                <li data-i18n="docs.secFeature3">The reverse tunnel allows only the authorized VPS to access your OData.</li>
+                <li data-i18n="docs.secFeature4">JWT-based authentication with Bearer tokens.</li>
+                <li data-i18n="docs.secFeature5">Token expiration handling for secure sessions.</li>
+                <li data-i18n="docs.secFeature6">Secure token signing for protected endpoints.</li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- ========================= documentation content end ========================= -->
+
+    <!-- ========================= footer start ========================= -->
+    <footer class="footer footer-style-1">
+      <div class="container">
+        <div class="widget-wrapper">
+          <div class="row">
+            <div class="col-xl-3 col-lg-4 col-md-6">
+              <div class="footer-widget">
+                <div class="logo">
+                  <a href="index.html"> <img src="assets/img/images/icon.png" alt="PulseConnector" style="max-height: 50px;"> </a>
+                </div>
+                <p class="desc" data-i18n="footer.description">PulseConnector is a lightweight Python database connector that transforms your data into a ready-to-use OData API in minutes.</p>
+                <ul class="socials">
+                  <li> <a href="#0"> <i class="lni lni-github-original"></i> </a> </li>
+                  <li> <a href="#0"> <i class="lni lni-linkedin-original"></i> </a> </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-xl-2 offset-xl-1 col-lg-2 col-md-6 col-sm-6">
+              <div class="footer-widget">
+                <h6 data-i18n="footer.quickLinks">Quick Link</h6>
+                <ul class="links">
+                  <li> <a href="index.html" data-i18n="nav.home">Home</a> </li>
+                  <li> <a href="index.html#services" data-i18n="footer.features">Features</a> </li>
+                  <li> <a href="documentation.html" data-i18n="footer.documentation">Documentation</a> </li>
+                  <li> <a href="index.html#contact" data-i18n="nav.contact">Contact</a> </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-6">
+              <div class="footer-widget">
+                <h6 data-i18n="footer.documentation">Documentation</h6>
+                <ul class="links">
+                  <li> <a href="#getting-started" data-i18n="docs.gettingStarted">Getting Started</a> </li>
+                  <li> <a href="#configuration" data-i18n="docs.configuration">Configuration</a> </li>
+                  <li> <a href="#odata-queries" data-i18n="docs.odataQueries">OData Queries</a> </li>
+                  <li> <a href="#security" data-i18n="docs.security">Security</a> </li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-6">
+              <div class="footer-widget">
+                <h6 data-i18n="footer.resources">Resources</h6>
+                <ul class="links">
+                  <li> <a href="documentation.html" data-i18n="footer.documentation">Documentation</a> </li>
+                  <li> <a href="#0" data-i18n="footer.benchmark">Benchmark</a> </li>
+                  <li> <a href="#0" data-i18n="footer.installer">Installer</a> </li>
+                  <li> <a href="index.html#pricing" data-i18n="license.title">License</a> </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="copyright-wrapper">
+          <p>Diseñado por PulseConnector</p>
+        </div>
+      </div>
+    </footer>
+    <!-- ========================= footer end ========================= -->
+
+    <!-- ========================= scroll-top ========================= -->
+    <a href="#" class="scroll-top"> <i class="lni lni-chevron-up"></i> </a>
+
+    <!-- ========================= JS here ========================= -->
+    <script src="assets/js/bootstrap.5.0.0.alpha-2-min.js"></script>
+    <script src="assets/js/wow.min.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/i18n.js"></script>
+
+    <!-- Scroll Spy for Documentation Sidebar -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const sections = document.querySelectorAll('.doc-section');
+        const navLinks = document.querySelectorAll('.doc-sidebar ul li a');
+
+        function updateActiveLink() {
+          let currentSection = '';
+
+          sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            const scrollPosition = window.scrollY + 150;
+
+            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+              currentSection = section.getAttribute('id');
+            }
+          });
+
+          navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === '#' + currentSection) {
+              link.classList.add('active');
+            }
+          });
+        }
+
+        window.addEventListener('scroll', updateActiveLink);
+        updateActiveLink();
+
+        // Copy to clipboard functionality
+        const codeBlocks = document.querySelectorAll('.code-block');
+
+        codeBlocks.forEach(block => {
+          const copyBtn = document.createElement('button');
+          copyBtn.className = 'copy-btn';
+          copyBtn.innerHTML = '<i class="lni lni-files"></i> Copy';
+          block.appendChild(copyBtn);
+
+          copyBtn.addEventListener('click', function() {
+            const code = block.querySelector('pre').textContent;
+            navigator.clipboard.writeText(code).then(() => {
+              copyBtn.innerHTML = '<i class="lni lni-checkmark"></i> Copied!';
+              copyBtn.classList.add('copied');
+
+              setTimeout(() => {
+                copyBtn.innerHTML = '<i class="lni lni-files"></i> Copy';
+                copyBtn.classList.remove('copied');
+              }, 2000);
+            });
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
