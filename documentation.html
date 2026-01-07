@@ -11,18 +11,20 @@
     <!-- ========================= CSS here ========================= -->
     <link rel="stylesheet" href="assets/css/bootstrap-5.0.0-alpha-2.min.css" />
     <link rel="stylesheet" href="assets/css/LineIcons.2.0.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
     <link rel="stylesheet" href="assets/css/animate.css"/>
     <link rel="stylesheet" href="assets/css/lindy-uikit.css"/>
     <style>
+      /* Documentation Page Styles - Dark Mode */
       .doc-section {
         padding: 40px 0;
-        border-bottom: 1px solid #e5e5e5;
+        border-bottom: 1px solid var(--border-color);
       }
       .doc-section:last-child {
         border-bottom: none;
       }
       .code-block {
-        background-color: #2d2d2d;
+        background-color: var(--bg-primary);
         color: #f8f8f2;
         padding: 20px;
         border-radius: 8px;
@@ -31,6 +33,7 @@
         font-size: 14px;
         margin: 20px 0;
         position: relative;
+        border: 1px solid var(--border-color);
       }
       .code-block code {
         color: #f8f8f2;
@@ -39,9 +42,9 @@
         position: absolute;
         top: 10px;
         right: 10px;
-        background-color: #444;
-        color: #fff;
-        border: none;
+        background-color: var(--bg-tertiary);
+        color: var(--text-primary);
+        border: 1px solid var(--border-color);
         padding: 6px 12px;
         border-radius: 4px;
         font-size: 12px;
@@ -53,14 +56,20 @@
         opacity: 1;
       }
       .copy-btn:hover {
-        background-color: #5767f9;
+        background-color: var(--accent-color);
+        border-color: var(--accent-color);
       }
       .copy-btn.copied {
         background-color: #49cc90;
+        border-color: #49cc90;
       }
       .doc-sidebar {
         position: sticky;
         top: 100px;
+        background: var(--bg-secondary);
+        padding: 20px;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
       }
       .doc-sidebar ul {
         list-style: none;
@@ -70,37 +79,40 @@
         margin-bottom: 10px;
       }
       .doc-sidebar ul li a {
-        color: #585978;
+        color: var(--text-secondary);
         text-decoration: none;
         transition: all 0.3s;
       }
       .doc-sidebar ul li a:hover,
       .doc-sidebar ul li a.active {
-        color: #5767f9;
+        color: var(--accent-color);
         font-weight: 600;
       }
       .doc-title {
-        color: #2c2c51;
+        color: var(--text-primary);
         margin-bottom: 20px;
       }
       .doc-subtitle {
-        color: #5767f9;
+        color: var(--accent-color);
         margin-top: 30px;
         margin-bottom: 15px;
       }
       .table-params {
         width: 100%;
         margin: 20px 0;
+        border-collapse: collapse;
       }
       .table-params th {
-        background-color: #f8f9fa;
+        background-color: var(--bg-secondary);
         padding: 12px;
         text-align: left;
-        border-bottom: 2px solid #e5e5e5;
+        border-bottom: 2px solid var(--border-color);
+        color: var(--text-primary);
       }
       .table-params td {
         padding: 12px;
-        border-bottom: 1px solid #e5e5e5;
+        border-bottom: 1px solid var(--border-color);
+        color: var(--text-secondary);
       }
       .badge-method {
         padding: 4px 10px;
@@ -113,7 +125,7 @@
       .badge-put { background-color: #fca130; color: white; }
       .badge-patch { background-color: #50e3c2; color: white; }
 
-      /* Language Selector */
+      /* Language Selector - Dark Mode */
       .lang-selector {
         margin-left: 15px;
         position: relative;
@@ -128,16 +140,16 @@
         gap: 6px;
         padding: 6px 12px;
         background-color: transparent;
-        border: 1px solid rgba(0,0,0,0.15);
+        border: 1px solid var(--border-color);
         border-radius: 6px;
         cursor: pointer;
         font-size: 14px;
-        color: #333;
+        color: var(--text-secondary);
         transition: all 0.3s ease;
       }
       .lang-current:hover {
-        border-color: #5767f9;
-        background-color: rgba(87, 103, 249, 0.05);
+        border-color: var(--accent-color);
+        background-color: var(--accent-light);
       }
       .lang-current .flag {
         font-size: 18px;
@@ -156,9 +168,10 @@
         top: 100%;
         right: 0;
         margin-top: 5px;
-        background: #fff;
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
         border-radius: 8px;
-        box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+        box-shadow: 0 5px 25px var(--shadow-color);
         min-width: 150px;
         opacity: 0;
         visibility: hidden;
@@ -180,18 +193,75 @@
         cursor: pointer;
         transition: background-color 0.2s ease;
         font-size: 14px;
-        color: #333;
+        color: var(--text-secondary);
       }
       .lang-option:hover {
-        background-color: #f5f5f5;
+        background-color: var(--bg-tertiary);
       }
       .lang-option.active {
-        background-color: #5767f9;
+        background-color: var(--accent-color);
         color: #fff;
       }
       .lang-option .flag {
         font-size: 20px;
         line-height: 1;
+      }
+      /* Theme Toggle */
+      .theme-toggle {
+        margin-left: 12px;
+        display: flex;
+        align-items: center;
+      }
+      .theme-toggle-btn {
+        width: 44px;
+        height: 24px;
+        border-radius: 12px;
+        background-color: var(--bg-tertiary);
+        border: 1px solid var(--border-color);
+        cursor: pointer;
+        position: relative;
+        transition: all 0.3s ease;
+      }
+      .theme-toggle-btn:hover {
+        border-color: var(--accent-color);
+      }
+      .theme-toggle-btn::before {
+        content: '';
+        position: absolute;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background-color: var(--accent-color);
+        top: 2px;
+        left: 2px;
+        transition: transform 0.3s ease;
+      }
+      .theme-toggle-btn .icon-sun,
+      .theme-toggle-btn .icon-moon {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 12px;
+        transition: opacity 0.3s ease;
+      }
+      .theme-toggle-btn .icon-sun {
+        left: 5px;
+        color: #fbbf24;
+        opacity: 0;
+      }
+      .theme-toggle-btn .icon-moon {
+        right: 5px;
+        color: #8b949e;
+        opacity: 1;
+      }
+      body.light-theme .theme-toggle-btn::before {
+        transform: translateX(20px);
+      }
+      body.light-theme .theme-toggle-btn .icon-sun {
+        opacity: 1;
+      }
+      body.light-theme .theme-toggle-btn .icon-moon {
+        opacity: 0;
       }
     </style>
   </head>
@@ -222,13 +292,13 @@
                       <a class="page-scroll active" href="documentation.html" data-i18n="nav.docs">Documentation</a>
                     </li>
                     <li class="nav-item">
-                      <a class="page-scroll" href="index.html#pricing" data-i18n="license.title">License</a>
+                      <a class="page-scroll" href="index.html#platforms" data-i18n="platforms.title">Platforms</a>
                     </li>
                     <li class="nav-item">
                       <a class="page-scroll" href="index.html#contact" data-i18n="nav.contact">Contact</a>
                     </li>
                   </ul>
-                  <a href="index.html#contact" class="button button-sm radius-10 d-none d-lg-flex" data-i18n="nav.download">Download</a>
+                  <a href="index.html#platforms" class="button button-sm radius-10 d-none d-lg-flex" data-i18n="nav.download">Download</a>
                   <!-- Language Selector -->
                   <div class="lang-selector">
                     <div class="lang-dropdown" id="langDropdown">
@@ -240,14 +310,15 @@
                       <div class="lang-options">
                         <div class="lang-option" data-lang="en"><span class="flag">🇺🇸</span><span>English</span></div>
                         <div class="lang-option" data-lang="es"><span class="flag">🇪🇸</span><span>Español</span></div>
-                        <div class="lang-option" data-lang="pt"><span class="flag">🇧🇷</span><span>Português</span></div>
-                        <div class="lang-option" data-lang="fr"><span class="flag">🇫🇷</span><span>Français</span></div>
-                        <div class="lang-option" data-lang="it"><span class="flag">🇮🇹</span><span>Italiano</span></div>
-                        <div class="lang-option" data-lang="ja"><span class="flag">🇯🇵</span><span>日本語</span></div>
-                        <div class="lang-option" data-lang="zh"><span class="flag">🇨🇳</span><span>中文</span></div>
-                        <div class="lang-option" data-lang="de"><span class="flag">🇩🇪</span><span>Deutsch</span></div>
                       </div>
                     </div>
+                  </div>
+                  <!-- Theme Toggle -->
+                  <div class="theme-toggle">
+                    <button class="theme-toggle-btn" id="themeToggle" title="Toggle theme">
+                      <i class="fas fa-sun icon-sun"></i>
+                      <i class="fas fa-moon icon-moon"></i>
+                    </button>
                   </div>
                 </div>
               </nav>
@@ -655,7 +726,7 @@
                   <li> <a href="documentation.html" data-i18n="footer.documentation">Documentation</a> </li>
                   <li> <a href="#0" data-i18n="footer.benchmark">Benchmark</a> </li>
                   <li> <a href="#0" data-i18n="footer.installer">Installer</a> </li>
-                  <li> <a href="index.html#pricing" data-i18n="license.title">License</a> </li>
+                  <li> <a href="index.html#platforms" data-i18n="platforms.title">Platforms</a> </li>
                 </ul>
               </div>
             </div>

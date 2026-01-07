@@ -75,28 +75,28 @@
     "description": "Custom SQL-based Data Access Layer for improved concurrency. Native DB drivers with explicit pooling. JWT-Based Authentication. HTTPS Proxy integration. Cross-platform compatibility (Windows/Linux x64).",
     "cta": "Get Started"
   },
-  "license": {
-    "title": "License",
-    "subtitle": "PulseConnector is free for non-commercial use. Commercial use requires prior written authorization from the author.",
-    "free": {
-      "type": "Non-Commercial",
-      "title": "Free License",
-      "price": "Free",
-      "feature1": "Full feature access",
-      "feature2": "Multi-database support",
-      "feature3": "SSH tunnel security",
-      "feature4": "OData API endpoints",
-      "cta": "Download"
+  "platforms": {
+    "title": "Available Platforms",
+    "subtitle": "PulseConnector is available for Windows and Linux. Download the version for your operating system and start creating OData APIs in minutes.",
+    "popular": "Popular",
+    "download": "Download",
+    "windows": {
+      "type": "Desktop",
+      "title": "Windows",
+      "version": "v1.0.0",
+      "feature1": "Windows 10/11 (64-bit)",
+      "feature2": "Easy installation",
+      "feature3": "Automatic updates",
+      "feature4": "Full feature support"
     },
-    "commercial": {
-      "type": "Business Use",
-      "title": "Commercial License",
-      "price": "Contact Us",
-      "feature1": "All free features included",
-      "feature2": "Commercial usage rights",
-      "feature3": "Priority support",
-      "feature4": "Custom integrations",
-      "cta": "Contact"
+    "linux": {
+      "type": "Server & Desktop",
+      "title": "Linux",
+      "version": "v1.0.0",
+      "feature1": "Ubuntu, Debian, CentOS",
+      "feature2": "Command line interface",
+      "feature3": "Systemd service support",
+      "feature4": "Full feature support"
     }
   },
   "team": {

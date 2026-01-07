@@ -75,28 +75,28 @@
     "description": "Capa de Acceso a Datos basada en SQL personalizado para mejor concurrencia. Drivers nativos de BD con pooling explícito. Autenticación JWT. Integración de Proxy HTTPS. Compatibilidad multiplataforma (Windows/Linux x64).",
     "cta": "Comenzar"
   },
-  "license": {
-    "title": "Licencia",
-    "subtitle": "PulseConnector es gratuito para uso no comercial. El uso comercial requiere autorización previa por escrito del autor.",
-    "free": {
-      "type": "No Comercial",
-      "title": "Licencia Gratuita",
-      "price": "Gratis",
-      "feature1": "Acceso completo a funciones",
-      "feature2": "Soporte multi-base de datos",
-      "feature3": "Seguridad con túnel SSH",
-      "feature4": "Endpoints API OData",
-      "cta": "Descargar"
+  "platforms": {
+    "title": "Plataformas Disponibles",
+    "subtitle": "PulseConnector está disponible para Windows y Linux. Descarga la versión para tu sistema operativo y comienza a crear APIs OData en minutos.",
+    "popular": "Popular",
+    "download": "Descargar",
+    "windows": {
+      "type": "Escritorio",
+      "title": "Windows",
+      "version": "v1.0.0",
+      "feature1": "Windows 10/11 (64-bit)",
+      "feature2": "Instalación fácil",
+      "feature3": "Actualizaciones automáticas",
+      "feature4": "Soporte completo de funciones"
     },
-    "commercial": {
-      "type": "Uso Empresarial",
-      "title": "Licencia Comercial",
-      "price": "Contáctanos",
-      "feature1": "Todas las funciones gratuitas",
-      "feature2": "Derechos de uso comercial",
-      "feature3": "Soporte prioritario",
-      "feature4": "Integraciones personalizadas",
-      "cta": "Contactar"
+    "linux": {
+      "type": "Servidor y Escritorio",
+      "title": "Linux",
+      "version": "v1.0.0",
+      "feature1": "Ubuntu, Debian, CentOS",
+      "feature2": "Interfaz de línea de comandos",
+      "feature3": "Soporte de servicio Systemd",
+      "feature4": "Soporte completo de funciones"
     }
   },
   "team": {
