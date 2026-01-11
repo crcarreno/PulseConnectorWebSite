@@ -154,6 +154,21 @@
       body.light-theme .theme-toggle-btn .icon-moon {
         opacity: 0;
       }
+      /* Spinner CSS puro */
+      .btn-spinner {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        border: 2px solid currentColor;
+        border-radius: 50%;
+        border-top-color: transparent;
+        animation: btn-spin 0.8s linear infinite;
+        vertical-align: middle;
+        margin-right: 6px;
+      }
+      @keyframes btn-spin {
+        to { transform: rotate(360deg); }
+      }
     </style>
   </head>
   <body>
@@ -789,19 +804,19 @@
         <div class="row">
           <div class="col-lg-7">
             <div class="contact-form-wrapper">
-              <form action="assets/php/contact.php" method="POST">
+              <form id="contactForm" onsubmit="sendEmail(event)">
                 <div class="row">
                   <div class="col-md-6">
                     <div class="single-input">
                       <label for="name" data-i18n="contact.form.name">Name</label>
-                      <input type="text" id="name" name="name" class="form-input" placeholder="Name" data-i18n-placeholder="contact.form.name">
+                      <input type="text" id="name" name="name" class="form-input" placeholder="Name" data-i18n-placeholder="contact.form.name" required>
                       <i class="lni lni-user"></i>
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div class="single-input">
                       <label for="email" data-i18n="contact.form.email">Email</label>
-                      <input type="email" id="email" name="email" class="form-input" placeholder="Email" data-i18n-placeholder="contact.form.email">
+                      <input type="email" id="email" name="email" class="form-input" placeholder="Email" data-i18n-placeholder="contact.form.email" required>
                       <i class="lni lni-envelope"></i>
                     </div>
                   </div>
@@ -822,13 +837,14 @@
                   <div class="col-md-12">
                     <div class="single-input">
                       <label for="message" data-i18n="contact.form.message">Message</label>
-                      <textarea name="message" id="message" class="form-input" placeholder="Message" data-i18n-placeholder="contact.form.message" rows="6"></textarea>
+                      <textarea name="message" id="message" class="form-input" placeholder="Message" data-i18n-placeholder="contact.form.message" rows="6" required></textarea>
                       <i class="lni lni-comments-alt"></i>
                     </div>
                   </div>
                   <div class="col-md-12">
+                    <div id="formMessage" style="display: none; padding: 15px; border-radius: 8px; margin-bottom: 15px;"></div>
                     <div class="form-button">
-                      <button type="submit" class="button radius-10"><span data-i18n="contact.form.submit">Submit</span> <i class="lni lni-telegram-original"></i> </button>
+                      <button type="submit" id="submitBtn" class="button radius-10"><span data-i18n="contact.form.submit">Submit</span> <i class="lni lni-telegram-original"></i> </button>
                     </div>
                   </div>
                 </div>
@@ -860,7 +876,7 @@
                       <i class="lni lni-envelope"></i>
                     </div>
                     <div class="text">
-                      <p>contact@ecuarobot.com</p>
+                      <p>crcarreno@gmail.com</p>
                     </div>
                   </div>
                 </div>
@@ -966,5 +982,58 @@
     <script src="assets/js/wow.min.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="assets/js/i18n.js"></script>
+    <script>
+      async function sendEmail(e) {
+        e.preventDefault();
+
+        const form = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const formMessage = document.getElementById('formMessage');
+        const originalBtnText = submitBtn.innerHTML;
+
+        // Deshabilitar botón y mostrar loading
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class="btn-spinner"></span>Enviando...';
+        formMessage.style.display = 'none';
+
+        // Crear FormData
+        const formData = new FormData(form);
+
+        try {
+          const response = await fetch('send-email.php', {
+            method: 'POST',
+            body: formData
+          });
+
+          const result = await response.json();
+
+          // Mostrar mensaje
+          formMessage.style.display = 'block';
+
+          if (result.success) {
+            formMessage.style.backgroundColor = 'rgba(34, 197, 94, 0.15)';
+            formMessage.style.color = '#22c55e';
+            formMessage.style.border = '1px solid #22c55e';
+            formMessage.innerHTML = '<i class="fas fa-check-circle"></i> ' + result.message;
+            form.reset();
+          } else {
+            formMessage.style.backgroundColor = 'rgba(239, 68, 68, 0.15)';
+            formMessage.style.color = '#ef4444';
+            formMessage.style.border = '1px solid #ef4444';
+            formMessage.innerHTML = '<i class="fas fa-exclamation-circle"></i> ' + result.message;
+          }
+        } catch (error) {
+          formMessage.style.display = 'block';
+          formMessage.style.backgroundColor = 'rgba(239, 68, 68, 0.15)';
+          formMessage.style.color = '#ef4444';
+          formMessage.style.border = '1px solid #ef4444';
+          formMessage.innerHTML = '<i class="fas fa-exclamation-circle"></i> Error de conexión. Por favor, intenta de nuevo.';
+        } finally {
+          // Restaurar botón
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalBtnText;
+        }
+      }
+    </script>
   </body>
 </html>

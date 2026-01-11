@@ -1,0 +1,11 @@
+# Bloquear acceso a archivos sensibles
+<FilesMatch "^\.env$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Bloquear acceso a PHPMailer
+<DirectoryMatch "PHPMailer">
+    Order allow,deny
+    Deny from all
+</DirectoryMatch>
